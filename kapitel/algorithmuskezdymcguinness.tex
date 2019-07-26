@@ -1,0 +1,44 @@
+% kapitel3.tex
+\chapter{Algorithmus von Kezdy und McGuinness}
+\label{cha:algorithmuskezdymcguinness}
+
+Da die Arbeit auf dem sequenziellen Algorithmus von Kezdy und McGuinness, den sie in \cite{Kez92} vorstellen, beruht, wird er im Folgenden erklärt.
+Als Eingabe wird ein ungerichteter Graph ohne Mehrfachkanten erwartet, ausgegeben wird, ob ein $K_5$-Minor enthalten ist oder nicht.
+Für den Fall, dass einer gefunden wurde, kann zusätzlich ausgegeben werden, welche Knoten den Minor formen.
+Die Laufzeit liegt in $\mathcal{O}(n^2)$
+
+Planaritästests können bereits in linearer Laufzeit entscheiden, ob ein Graph planar ist oder einen \kf- \bzw \kdd-Minor enthält.
+Es muss lediglich der Fall behandelt werden, in dem der der Test stoppt, weil er einen \kdd-Minor gefunden hat, denn es kann nicht garantiert werden, ob zusätzlich ein \kf-Minor enthalten ist.
+Als Lösung testet der Algoritmus von Kezdy und McGuiness, ob ein gefundener \kdd-Minor ein gültiger \dseparator ist und zerlegt \ggf den Graph in augmentierte Komponenten.
+Anschließend kann der Planaritästest auf die einzelnen Komponenten rekursiv angewendet werden.
+
+Um das zentrale Theorem aus \cite{Kez92}, welches den \kdd-Minor untersucht, zu erklären, wird zunächst die Gültigkeit augmentierter Komponenten behandelt:
+\begin{theorem}
+Für $k \geq 3$: Sei $G$ ein $k$-zusammenhängender Graph und $C$ ein $k$-Schnitt in $G$.
+Alle durch $C$ definierten augmentierten Komponenten sind Minoren von $G$, falls es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
+\end{theorem}
+\begin{beweis}
+Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ \bzw $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G-C$ entstehen.
+Die zugehörigen augmentierten Komponenten seien $A_1, A_2, ..., A_k$ \bzw $A_1, A_2, ..., A_{k-1}$.
+Betrachtet wird eine beliebige dieser augmentierten Komponenten $A_i$.
+Der Definition der augmentierten Komponenten nach finden sich bereits alle Knoten von $A_i$ in $G$ wieder.
+Weiterhin enthält $G$ mindestens alle Kanten in $A_i - C$ sowie die verbindenden Kanten zwischen $A_i$ und $C$.
+Jedoch bilden in $A_i$ die Knoten von $C$ eine Clique, es existieren also \ggf Kanten zwichen den Knoten von $C$ in $A_i$, die es nicht in $G$ gibt
+Es bleibt zu zeigen, dass die Kanten, die für diese Clique in $A_i$ nötig sind, durch Kantenkontraktionen in $G$ erzeugt werden können.
+Dadurch, dass $G$ $k$-zusammenhängend ist, besitzt jede Zusammenhangskomponente von $G - C$ Kanten zu $c_1, c_2, ..., c_k$.
+Würde eine Kante zu einem Knoten $c_j$ mit $1 \leq j \leq k$ fehlen, wäre ein $k-1$-Schnitt bestehend aus $C \setminus c_j$ möglich, was im Widerspruch zu dem $k$-Zusammenhang stehen würde.
+Das Theorem unterscheided nun zwei Fälle, um die fehlenden Kanten bereitstellen zu können:
+\begin{enumerate}
+\item Es existieren $k$ Zusammenhangskomponenten.
+      Wird $A_i$ betrachtet, kommen die Knoten in $Z \setminus Z_i$ in Frage, um durch Kantenkontraktionen die fehlenden Kanten für die Clique von $C$ in $A_i$ zu erzeugen.
+      Um die Kanten von $C$ in $A_i$ in $G$ zu erzeugen, kann zunächst die Kante, die $c_1$ mit $Z_1$ kontrahiert werden.
+      Anschließend ist $c_1$ mit allen Knoten in $C$ verbunden.
+      Dies kann analog für alle Knoten in $C$ und den entsprechenden Zusammenhangskomponenten durchgeführt werden außer für $c_i$, da $A_i$ der gesuchte Minor ist.
+      Allerdings ist $c_i$ aufgrund des $k$-Zusammenhangs mit allen anderen Zusammenhangskomponenten verbunden und nach den beschriebenen Kontraktionen bildet $C$ eine Clique.
+\item Es existieren $k-1$ Komponenten, aber mindestens zwei bestehen aus mehr als einem Knoten.
+      Analog zum vorherigen Fall können die Kanten zwischen den Knoten von $C$ und den Zusammenhangskomponenten $A$ kontrahiert werden.
+      Es fehlt jedoch eine Kantenkontraktion, da eine Zusammenhangskomponente weniger vorliegt.
+      Es gibt mindestens eine Zusammenhangskomponente aus $Z \setminus Z_i$, die aus zwei oder mehr Knoten besteht.
+      Da der Graph $k$-zusammenhängend ist, sind mindestens zwei dieser Knoten mit allen in $C$ verbunden, sodass sie durch Kontraktionen mit zwei unterschiedlichen Knoten aus $C$ genutzt werden könnenm um die gesuchte Clique zu erzeugen.
+\end{enumerate}
+\end{beweis}
