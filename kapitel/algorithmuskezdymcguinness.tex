@@ -9,36 +9,89 @@ Die Laufzeit liegt in $\mathcal{O}(n^2)$
 
 Planaritästests können bereits in linearer Laufzeit entscheiden, ob ein Graph planar ist oder einen \kf- \bzw \kdd-Minor enthält.
 Es muss lediglich der Fall behandelt werden, in dem der der Test stoppt, weil er einen \kdd-Minor gefunden hat, denn es kann nicht garantiert werden, ob zusätzlich ein \kf-Minor enthalten ist.
-Als Lösung testet der Algoritmus von Kezdy und McGuiness, ob ein gefundener \kdd-Minor ein gültiger \dseparator ist und zerlegt \ggf den Graph in augmentierte Komponenten.
+Als Lösung testet der Algoritmus von Kezdy und McGuiness, ob ein gefundener \kdd-Minor ein gültiger $3$-Separator ist und zerlegt \ggf den Graph in augmentierte Komponenten.
 Anschließend kann der Planaritästest auf die einzelnen Komponenten rekursiv angewendet werden.
 
 Um das zentrale Theorem aus \cite{Kez92}, welches den \kdd-Minor untersucht, zu erklären, wird zunächst die Gültigkeit augmentierter Komponenten behandelt:
-\begin{theorem}
-Für $k \geq 3$: Sei $G$ ein $k$-zusammenhängender Graph und $C$ ein $k$-Schnitt in $G$.
-Alle durch $C$ definierten augmentierten Komponenten sind Minoren von $G$, falls es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
+\begin{theorem}\label{Theorem33}
+  Für $k \geq 3$: Sei $G$ ein $k$-zusammenhängender Graph und $C$ ein $k$-Schnitt in $G$.
+  Alle durch $C$ definierten augmentierten Komponenten sind Minoren von $G$, falls es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
 \end{theorem}
 \begin{beweis}
-Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ \bzw $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G-C$ entstehen.
-Die zugehörigen augmentierten Komponenten seien $A_1, A_2, ..., A_k$ \bzw $A_1, A_2, ..., A_{k-1}$.
-Betrachtet wird eine beliebige dieser augmentierten Komponenten $A_i$.
-Der Definition der augmentierten Komponenten nach finden sich bereits alle Knoten von $A_i$ in $G$ wieder.
-Weiterhin enthält $G$ mindestens alle Kanten in $A_i - C$ sowie die verbindenden Kanten zwischen $A_i$ und $C$.
-Jedoch bilden in $A_i$ die Knoten von $C$ eine Clique, es existieren also \ggf Kanten zwichen den Knoten von $C$ in $A_i$, die es nicht in $G$ gibt
-Es bleibt zu zeigen, dass die Kanten, die für diese Clique in $A_i$ nötig sind, durch Kantenkontraktionen in $G$ erzeugt werden können.
-Dadurch, dass $G$ $k$-zusammenhängend ist, besitzt jede Zusammenhangskomponente von $G - C$ Kanten zu $c_1, c_2, ..., c_k$.
-Würde eine Kante zu einem Knoten $c_j$ mit $1 \leq j \leq k$ fehlen, wäre ein $k-1$-Schnitt bestehend aus $C \setminus c_j$ möglich, was im Widerspruch zu dem $k$-Zusammenhang stehen würde.
-Das Theorem unterscheided nun zwei Fälle, um die fehlenden Kanten bereitstellen zu können:
-\begin{enumerate}
-\item Es existieren $k$ Zusammenhangskomponenten.
-      Wird $A_i$ betrachtet, kommen die Knoten in $Z \setminus Z_i$ in Frage, um durch Kantenkontraktionen die fehlenden Kanten für die Clique von $C$ in $A_i$ zu erzeugen.
-      Um die Kanten von $C$ in $A_i$ in $G$ zu erzeugen, kann zunächst die Kante, die $c_1$ mit $Z_1$ kontrahiert werden.
-      Anschließend ist $c_1$ mit allen Knoten in $C$ verbunden.
-      Dies kann analog für alle Knoten in $C$ und den entsprechenden Zusammenhangskomponenten durchgeführt werden außer für $c_i$, da $A_i$ der gesuchte Minor ist.
-      Allerdings ist $c_i$ aufgrund des $k$-Zusammenhangs mit allen anderen Zusammenhangskomponenten verbunden und nach den beschriebenen Kontraktionen bildet $C$ eine Clique.
-\item Es existieren $k-1$ Komponenten, aber mindestens zwei bestehen aus mehr als einem Knoten.
-      Analog zum vorherigen Fall können die Kanten zwischen den Knoten von $C$ und den Zusammenhangskomponenten $A$ kontrahiert werden.
-      Es fehlt jedoch eine Kantenkontraktion, da eine Zusammenhangskomponente weniger vorliegt.
-      Es gibt mindestens eine Zusammenhangskomponente aus $Z \setminus Z_i$, die aus zwei oder mehr Knoten besteht.
-      Da der Graph $k$-zusammenhängend ist, sind mindestens zwei dieser Knoten mit allen in $C$ verbunden, sodass sie durch Kontraktionen mit zwei unterschiedlichen Knoten aus $C$ genutzt werden könnenm um die gesuchte Clique zu erzeugen.
-\end{enumerate}
+  Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ \bzw $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G \cap C$ entstehen.
+  Die zugehörigen augmentierten Komponenten seien $A_1, A_2, ..., A_k$ \bzw $A_1, A_2, ..., A_{k-1}$.
+  Betrachtet wird eine beliebige dieser augmentierten Komponenten $A_i$.
+  Der Definition der augmentierten Komponenten nach finden sich bereits alle Knoten von $A_i$ in $G$ wieder.
+  Weiterhin enthält $G$ mindestens alle Kanten in $A_i \cap C$ sowie die verbindenden Kanten zwischen $A_i$ und $C$.
+  Jedoch bilden in $A_i$ die Knoten von $C$ eine Clique, es existieren also \ggf Kanten zwichen den Knoten von $C$ in $A_i$, die es nicht in $G$ gibt
+  Es bleibt zu zeigen, dass die Kanten, die für diese Clique in $A_i$ nötig sind, durch Kantenkontraktionen in $G$ erzeugt werden können.
+  Dadurch, dass $G$ $k$-zusammenhängend ist, besitzt jede Zusammenhangskomponente von $G \cap C$ Kanten zu $c_1, c_2, ..., c_k$.
+  Würde eine Kante zu einem Knoten $c_j$ mit $1 \leq j \leq k$ fehlen, wäre ein $k-1$-Schnitt bestehend aus $C \setminus c_j$ möglich, was im Widerspruch zu dem $k$-Zusammenhang stehen würde.
+  Das Theorem unterscheided nun zwei Fälle, um die fehlenden Kanten bereitstellen zu können:
+  \begin{enumerate}
+    \item Es existieren $k$ Zusammenhangskomponenten.
+          Wird $A_i$ betrachtet, kommen die Knoten in $Z \setminus Z_i$ in Frage, um durch Kantenkontraktionen die fehlenden Kanten für die Clique von $C$ in $A_i$ zu erzeugen.
+          Um die Kanten von $C$ in $A_i$ in $G$ zu erzeugen, kann zunächst der Pfad, der $c_1$ mit $Z_1$ verbindet, kontrahiert werden.
+          Anschließend ist $c_1$ mit allen Knoten in $C$ verbunden.
+          Dies kann analog für alle Knoten in $C$ und den entsprechenden Zusammenhangskomponenten durchgeführt werden außer für $c_i$, da $A_i$ der gesuchte Minor ist.
+          Allerdings ist $c_i$ aufgrund des $k$-Zusammenhangs mit allen anderen Zusammenhangskomponenten verbunden und nach den beschriebenen Kontraktionen bildet $C$ eine Clique.
+    \item Es existieren $k-1$ Komponenten, aber mindestens zwei bestehen aus mehr als einem Knoten.
+          Analog zum vorherigen Fall können die Pfade zwischen den Knoten von $C$ und den Zusammenhangskomponenten $A$ kontrahiert werden.
+          Es fehlt jedoch ein Pfad, da eine Zusammenhangskomponente weniger vorliegt.
+          Es gibt mindestens eine Zusammenhangskomponente aus $Z \setminus Z_i$, die aus zwei oder mehr Knoten besteht.
+          Da der Graph $k$-zusammenhängend ist, sind mindestens zwei dieser Knoten mit allen in $C$ verbunden, sodass sie durch Kontraktionen mit zwei unterschiedlichen Knoten aus $C$ genutzt werden könnenm um die gesuchte Clique zu erzeugen.
+  \end{enumerate}
+\end{beweis}
+
+Als nächstes stellen Kezdy und McGuinness fest, dass im Fall eines $3$-Separators der Graph Komponenten zerlegt werden kann:
+\begin{theorem}\label{Theorem34}
+  Sei $G$ ein $3$-zusammenhängender Graph mit einem $3$-Schnitt $C$, der den Graph in mindestens $3$ Zusammenhangskomponenten zerlegt.
+  $G$ hat einen \kf-Minor, falls eine der durch $C$ definierten augmentierten Komponenten einen \kf-Minor enthält.
+\end{theorem}
+\begin{beweis}
+  Zunächst kann festgestellt werden, dass falls eine der augmentierten Komponenten einen \kf-Minor enthält, dieser laut Theorem \ref{Theorem33} auch ein Minor von $G$ ist.
+  Es bleibt zu zeigen, dass sich ein \kf-Minor nicht auf zwei augmentierte Komponenten erstreckt, sondern sich ausschließlich in einer befindet.
+  Angenommen es gilt \kf \minor $G$ und zwei der Branch-Sets, die den \kf-Minor bilden, befinden sich jeweils vollständig in unterschiedlichen Zusammenhangskomponenten.
+  In diesem Fall wäre $C$ ein $3$-Schnitt in dem gefundenen Minor, was im Widerspruch zu dem $4$-Zusammenhang des \kf steht.
+\end{beweis}
+
+Das zentrale Theorem ist darauf zurückzuführen, dass jeder Graph ohne \kf-Minor durch Cliquen-Summen von Teilgraphen, die planar oder isomorph zu $W$ sind, gebildet werden kann.\cite{Wag37}
+\begin{theorem}\label{Theorem36}
+  Sei $G$ ein $3$-zusammenhängender Graph mit einem \kdd-Homeomorph $S$, dessen Knoten gemäß einer 2-Färbung in $R = \{a, b, c\}$ und $B = \{x, y, z\}$ unterteilt sind.
+  Eine der folgenden Bedingungen trifft auf $G$ zu:
+  \begin{enumerate}
+    \item $G$ enthält einen \kf-Minor.\label{Theorem361}
+    \item $G$ ist isomorph zu $W$.\label{Theorem362}
+    \item $\{a, b, c\}$ bilden einen $3$-Separator, sodass $\{x, y, z\}$ in separaten Komponenten liegen.\label{Theorem363}
+    \item $\{x, y, z\}$ bilden einen $3$-Separator, sodass $\{a, b, c\}$ in separaten Komponenten liegen.\label{Theorem364}
+  \end{enumerate}
+\end{theorem}
+Durch die Theoreme \ref{Theorem33} und \ref{Theorem34} wurde gezeigt, dass der Graph in den Fällen \ref{Theorem363} und \ref{Theorem364} in augmentierte Komponenten zerlegt und darauf der Planaritästest ausgeführt werden kann.
+Daher stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ einen \kf-Minor enthält - also ob Bedingung \ref{Theorem361} zutrifft.
+
+% TODO: Bilder zum Lemma und M
+\begin{lemma}\label{Lemma32}
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homeomorph in $G$.
+  Hat ein Knoten $w$ in $G \cap S$ drei Pfade zu Knoten in $S$, die nicht alle im selben Branch-Fan liegen, enthält $G$ einen \kf-Minor.
+\end{lemma}
+\begin{beweis}
+  Seien $t, u, v$ die drei Endpunkte der Pfade in $S$.
+  Mindestens einer von ihnen ist ein innerer Knoten, da sonst alle im selben Branch-Fan liegen würden.
+  Sei \oBdA $t$ ein solcher innerer Knoten auf dem Pfad $P(a, x)$.
+  Folglich können $u$ und $v$ nicht beide in $F(a)$ oder $F(x)$ liegen, sonst lägen alle drei im gleichen Branch-Fan.
+  \begin{enumerate}
+    \item $u$ und $v$ sind nicht im gleichen Branch-Fan wie $t$. \label{Lemma321}
+          Dann müssen $u$ und $v$ ebenfalls innere Knoten sein, im Beispiel auf den Pfaden $P(y, b)$ \bzw $P(z, c)$.
+          Es kann ein $M$-Minor durch folgende Kontraktionen erzeugt werden: $u$ mit einem der roten und $v$ mit einem der blauen Knoten (analog $u$ mit blau und $v$ mit rot) sowie $P(w, t)$.
+    \item $u$ oder $v$ liegen auf $P(a, x)$. \label{Lemma322}
+          Sei \oBdA $u \in P(a, x)$.
+          Da $t$ ebenfalls in diesem Pfad liegt, gilt $\{t, u\} \in F(a) \cup F(x)$, sodass $v$ nicht in diesen beiden Branch-Fans liegen kann.
+          Es können $t$ und $v$ getauscht werden, sodass eine Reduktion auf Fall \ref{Lemma321} erreicht wird.
+    \item Entweder $u$ oder $v$ liegen im gleichen Branch-Fan wie $t$. \label{Lemma323}
+          Sei \oBdA $u \in F(x) \cap P(a, x)$, im Beispiel auf dem Pfad $P(b, x)$.
+          Es sind $\{t, u\} \in F(x)$, weshalb $v$ in einem anderen Branch Fan sein muss.
+          Da alle roten Knoten in $F(x)$ liegen, gilt konkreter $v \in (F(y) \cup F(z)) \cap \{a, b, c\}$
+          Es können $P(b, u)$ kontrahiert werden sowie je nach Fall entweder $P(v, y)$ oder $P(v, z)$.
+          Wird $P(w, t)$ ebenfalls kontrahiert, entsteht erneut ein $M$-Minor.
+  \end{enumerate}
 \end{beweis}
