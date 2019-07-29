@@ -67,7 +67,7 @@ Das zentrale Theorem ist darauf zurückzuführen, dass jeder Graph ohne \kf-Mino
   \end{enumerate}
 \end{theorem}
 Durch die Theoreme \ref{Theorem33} und \ref{Theorem34} wurde gezeigt, dass der Graph in den Fällen \ref{Theorem363} und \ref{Theorem364} in augmentierte Komponenten zerlegt und darauf der Planaritästest ausgeführt werden kann.
-Daher stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ einen \kf-Minor enthält - also ob Bedingung \ref{Theorem361} zutrifft.
+Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ einen \kf-Minor enthält - also ob Bedingung \ref{Theorem361} zutrifft.
 
 % TODO: Bilder zum Lemma und M
 \begin{lemma}\label{Lemma32}
@@ -89,9 +89,50 @@ Daher stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ 
           Es können $t$ und $v$ getauscht werden, sodass eine Reduktion auf Fall \ref{Lemma321} erreicht wird.
     \item Entweder $u$ oder $v$ liegen im gleichen Branch-Fan wie $t$. \label{Lemma323}
           Sei \oBdA $u \in F(x) \cap P(a, x)$, im Beispiel auf dem Pfad $P(b, x)$.
-          Es sind $\{t, u\} \in F(x)$, weshalb $v$ in einem anderen Branch Fan sein muss.
+          Es gilt $\{t, u\} \in F(x)$, weshalb $v$ in einem anderen Branch Fan sein muss.
           Da alle roten Knoten in $F(x)$ liegen, gilt konkreter $v \in (F(y) \cup F(z)) \cap \{a, b, c\}$
           Es können $P(b, u)$ kontrahiert werden sowie je nach Fall entweder $P(v, y)$ oder $P(v, z)$.
           Wird $P(w, t)$ ebenfalls kontrahiert, entsteht erneut ein $M$-Minor.
   \end{enumerate}
 \end{beweis}
+
+\begin{lemma}\label{Lemma33}
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homeomorph in $G$.
+  Betrachtet wird ein Pfad außerhalb von $S$, der zwei Knoten in einem roten Branch-Fan verbindet, welche jedoch nicht beide auf dem gleichen Pfad in $S$ liegen.
+  Analog dazu wird ein Pfad außerhalb von $S$ gesucht, der zwei Knoten in einem blauen Branch-Fan verbindet, ohne dass diese beide auf dem gleichen Pfad in $S$ liegen.
+  Existieren diese beiden Pfade in $G$, dann enthält $G$ einen \kf-Minor.
+\end{lemma}
+\begin{beweis}
+  Sei $P_1$ der Pfad, der zwei Knoten in einem roten Branch-Fan verbindet und $P_2$ der, der zwei in einem blauen Branch-Fan verbindet.
+  \OBdA hat $P_1$ Endpunkte in $F(a)$ und $P_2$ in $F(x)$.
+  Da laut Bedingung die Endpunkte nicht in einem einzelnen Pfad von $S$ liegen, kann $a$ kein Endpunkt von $P_1$ und $x$ kein Endpunkt von $P_2$ sein.
+  Es ergeben sich zwei Fälle:
+  \begin{enumerate}
+    \item Die beiden Pfade haben keine gemeinsamen Knoten
+          Da $P_1$ beide Endpunkte in $F(a)$ hat, liegen diese beiden Endpunkte in zwei unterschiedlichen blauen Branch-Fans.
+          Entsprechend sind die Endpunkte von $P_2$ in unterschiedlichen roten Branch-Fans.
+          Werden die Endpunkte von $P_1$ je mit den beiden blauen und die von $P_2$ mit den beiden roten Knoten von $S$ kontrahiert, entsteht ein \kf-Minor. % TODO: Skizze
+    \item Die beiden Pfade haben einen gemeinsamen Knoten $w$.
+          Liegt dieser gemeinsame Knoten außerhalb von $S$, kann Lemma \ref{Lemma32} angewendet werden, da die Endpunkte der Pfade nicht alle im gleichen Branch-Fan liegen.
+          Liegt $w$ innerhalb von $S$, ist er ein Endpunkt von $P_1$ und $P_2$ und muss auf dem Pfad $P(a, x)$ liegen, da dieser der einzige gemeinsame Pfad ist.
+          Sei $P_1 = P(w, u)$ und $P_2 = P(w, v)$.
+          Da $u$ nicht in $F(x)$ liegt und $v$ nicht in $F(a)$, gibt es einen Pfad von $u$ zu einem blauen Knoten und von $v$ zu einem roten Knoten, die sich nicht kreuzen und daher kontrahiert werden können.
+          Durch die Kontraktion dieser beiden Pfade entsteht ein $M$-Minor. % TODO: Skizze
+  \end{enumerate}
+\end{beweis}
+
+\begin{lemma}\label{Lemma34}
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homeomorph in $G$.
+  Betrachtet wird ein Pfad außerhalb von $S$, der zwei innere Knoten paralleler Pfade in $S$ verbindet sowie ein Pfad außerhalb von $S$, dessen Endpunkte nicht beide im gleichen Pfad von $S$ liegen.
+  Bestehen die Endpunkte der beiden Pfade aus mindestens drei unterschiedlichen Knoten in $S$, enthält $G$ einen \kf-Minor.
+\end{lemma}
+
+\begin{lemma}\label{Lemma35}
+  Sei $S$ ein \kdd-Homeomorph in $G$ mit den roten Knoten $R = \{a, b, c\}$ und den blauen Knoten $B = \{x, y, z\}$.
+  Bilden weder $R$, noch $B$ einen $3$-Schnitt, enthält $G$ einen \kf-Minor.
+\end{lemma}
+
+\begin{lemma}\label{Lemma36}
+  Sei $G$ ein $3$-zusammenhängender Graph mit einem $W$-Homeomorph.
+  Ist $G$ nicht isomorph zu $W$, enthält $G$ einen \kf-Minor.
+\end{lemma}
