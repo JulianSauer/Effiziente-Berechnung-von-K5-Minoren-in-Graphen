@@ -5,4 +5,13 @@ jobs:
        - image: aergus/latex
      steps:
        - checkout
-       - run: pdflatex main.tex
+       - run:
+           name: Compile
+           command: pdflatex main.tex
+       - run:
+           name: Generate output folder
+           command: |
+             mkdir /pdf;
+             cp main.pdf /pdf/main.pdf;
+       - store_artifacts:
+           path: /pdf
