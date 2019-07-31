@@ -2,30 +2,34 @@
 \chapter{Algorithmus von Kezdy und McGuinness}
 \label{cha:algorithmuskezdymcguinness}
 
-Da die Arbeit auf dem sequenziellen Algorithmus von Kezdy und McGuinness, den sie in \cite{Kez92} vorstellen, beruht, wird er im Folgenden erklärt.
+Da die Arbeit auf dem sequenziellen Algorithmus von Kezdy und McGuinness, den sie in \cite{KeM92} vorstellen, beruht, wird er im Folgenden erklärt.
 Als Eingabe wird ein ungerichteter Graph ohne Mehrfachkanten erwartet, ausgegeben wird, ob ein $K_5$-Minor enthalten ist oder nicht.
 Für den Fall, dass einer gefunden wurde, kann zusätzlich ausgegeben werden, welche Knoten den Minor formen.
 Die Laufzeit liegt in $\mathcal{O}(n^2)$
 
-Planaritästests können bereits in linearer Laufzeit entscheiden, ob ein Graph planar ist oder einen \kf- \bzw \kdd-Minor enthält.
+Planaritätstests können bereits in linearer Laufzeit entscheiden, ob ein Graph planar ist oder einen \kf- \bzw \kdd-Minor enthält.
 Es muss lediglich der Fall behandelt werden, in dem der der Test stoppt, weil er einen \kdd-Minor gefunden hat, denn es kann nicht garantiert werden, ob zusätzlich ein \kf-Minor enthalten ist.
-Als Lösung testet der Algoritmus von Kezdy und McGuiness, ob ein gefundener \kdd-Minor ein gültiger $3$-Separator ist und zerlegt \ggf den Graph in augmentierte Komponenten.
-Anschließend kann der Planaritästest auf die einzelnen Komponenten rekursiv angewendet werden.
+Als Lösung testet der Algoritmus von Kezdy und McGuinness, ob ein gefundener \kdd-Minor ein \dd-Separator ist und zerlegt \ggf den Graph in augmentierte Komponenten.
+Anschließend kann der Planaritätstest auf die einzelnen Komponenten rekursiv angewendet werden.
 
-Um das zentrale Theorem aus \cite{Kez92}, welches den \kdd-Minor untersucht, zu erklären, wird zunächst die Gültigkeit augmentierter Komponenten behandelt:
+
+\section{Behandlung von \kdd-Minoren}
+\label{sec:behandlung_von_kdd_minoren}
+
+Um das zentrale Theorem aus \cite{KeM92}, welches den \kdd-Minor untersucht, zu erklären, wird zunächst die Gültigkeit augmentierter Komponenten behandelt:
 \begin{theorem}\label{Theorem33}
   Für $k \geq 3$: Sei $G$ ein $k$-zusammenhängender Graph und $C$ ein $k$-Separator in $G$.
   Alle durch $C$ definierten augmentierten Komponenten sind Minoren von $G$, falls es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
 \end{theorem}
 \begin{beweis}
-  Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ \bzw $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G \cap C$ entstehen.
+  Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ \bzw $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G \setminus C$ entstehen.
   Die zugehörigen augmentierten Komponenten seien $A_1, A_2, ..., A_k$ \bzw $A_1, A_2, ..., A_{k-1}$.
   Betrachtet wird eine beliebige dieser augmentierten Komponenten $A_i$.
   Der Definition der augmentierten Komponenten nach finden sich bereits alle Knoten von $A_i$ in $G$ wieder. % Teilgraph
-  Weiterhin enthält $G$ mindestens alle Kanten in $A_i \cap C$ sowie die verbindenden Kanten zwischen $A_i$ und $C$.
+  Weiterhin enthält $G$ mindestens alle Kanten in $A_i \setminus C$ sowie die verbindenden Kanten zwischen $A_i$ und $C$.
   Jedoch bilden in $A_i$ die Knoten von $C$ eine Clique, es existieren also \ggf Kanten zwichen den Knoten von $C$ in $A_i$, die es nicht in $G$ gibt
   Es bleibt zu zeigen, dass die Kanten, die für diese Clique in $A_i$ nötig sind, durch Kantenkontraktionen in $G$ erzeugt werden können.
-  Dadurch, dass $G$ $k$-zusammenhängend ist, besitzt jede Zusammenhangskomponente von $G \cap C$ Kanten zu $c_1, c_2, ..., c_k$.
+  Dadurch, dass $G$ $k$-zusammenhängend ist, besitzt jede Zusammenhangskomponente von $G \setminus C$ Kanten zu $c_1, c_2, ..., c_k$.
   Würde eine Kante zu einem Knoten $c_j$ mit $1 \leq j \leq k$ fehlen, wäre ein $k-1$-Separator bestehend aus $C \setminus c_j$ möglich, was im Widerspruch zu dem $k$-Zusammenhang stehen würde.
   Das Theorem unterscheided nun zwei Fälle, um die fehlenden Kanten bereitstellen zu können:
   \begin{enumerate}
@@ -57,7 +61,7 @@ Als nächstes stellen Kezdy und McGuinness fest, dass im Fall eines \dd-Separato
 
 Das zentrale Theorem ist darauf zurückzuführen, dass jeder Graph ohne \kf-Minor durch Cliquen-Summen von Teilgraphen, die planar oder isomorph zu $W$ sind, gebildet werden kann.\cite{Wag37}
 \begin{theorem}\label{Theorem36}
-  Sei $G$ ein $3$-zusammenhängender Graph mit einem \kdd-Homeomorph $S$, dessen Knoten gemäß einer 2-Färbung in $R = \{a, b, c\}$ und $B = \{x, y, z\}$ unterteilt sind.
+  Sei $G$ ein $3$-zusammenhängender Graph mit einem \kdd-Homöomorph $S$, dessen Branch-Ends die rote Knotenmenge $R = \{a, b, c\}$ und blaue $B = \{x, y, z\}$ unterteilt sind.
   Eine der folgenden Bedingungen trifft auf $G$ zu:
   \begin{enumerate}
     \item $G$ enthält einen \kf-Minor.\label{Theorem361}
@@ -66,13 +70,13 @@ Das zentrale Theorem ist darauf zurückzuführen, dass jeder Graph ohne \kf-Mino
     \item $\{x, y, z\}$ bilden einen $3$-Separator, sodass $\{a, b, c\}$ in separaten Komponenten liegen.\label{Theorem364}
   \end{enumerate}
 \end{theorem}
-Durch die Theoreme \ref{Theorem33} und \ref{Theorem34} wurde gezeigt, dass der Graph in den Fällen \ref{Theorem363} und \ref{Theorem364} in augmentierte Komponenten zerlegt und darauf der Planaritästest ausgeführt werden kann.
+Durch die Theoreme \ref{Theorem33} und \ref{Theorem34} wurde gezeigt, dass der Graph in den Fällen \ref{Theorem363} und \ref{Theorem364} in augmentierte Komponenten zerlegt und darauf der Planaritätstest ausgeführt werden kann.
 Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ einen \kf-Minor enthält - also ob Bedingung \ref{Theorem361} zutrifft.
 
 % TODO: Bilder zum Lemma und M
 \begin{lemma}\label{Lemma32}
-  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homeomorph in $G$.
-  Hat ein Knoten $w$ in $G \cap S$ drei Pfade zu Knoten in $S$, die nicht alle im selben Branch-Fan liegen, enthält $G$ einen \kf-Minor.
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
+  Hat ein Knoten $w$ in $G \setminus S$ drei Pfade zu Knoten in $S$, die nicht alle im selben Branch-Fan liegen, enthält $G$ einen \kf-Minor.
 \end{lemma}
 \begin{beweis}
   Seien $t, u, v$ die drei Endpunkte der Pfade in $S$.
@@ -88,16 +92,16 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
           Da $t$ ebenfalls in diesem Pfad liegt, gilt $\{t, u\} \in F(a) \cup F(x)$, sodass $v$ nicht in diesen beiden Branch-Fans liegen kann.
           Es können $t$ und $v$ getauscht werden, sodass eine Reduktion auf Fall \ref{Lemma321} erreicht wird.
     \item Entweder $u$ oder $v$ liegen im gleichen Branch-Fan wie $t$. \label{Lemma323}
-          Sei \oBdA $u \in F(x) \cap P(a, x)$, im Beispiel auf dem Pfad $P(b, x)$.
+          Sei \oBdA $u \in F(x) \setminus P(a, x)$, im Beispiel auf dem Pfad $P(b, x)$.
           Es gilt $\{t, u\} \in F(x)$, weshalb $v$ in einem anderen Branch Fan sein muss.
-          Da alle roten Knoten in $F(x)$ liegen, gilt konkreter $v \in (F(y) \cup F(z)) \cap \{a, b, c\}$
+          Da alle roten Knoten in $F(x)$ liegen, gilt konkreter $v \in (F(y) \cup F(z)) \setminus \{a, b, c\}$
           Es können $P(b, u)$ kontrahiert werden sowie je nach Fall entweder $P(v, y)$ oder $P(v, z)$.
           Wird $P(w, t)$ ebenfalls kontrahiert, entsteht erneut ein $M$-Minor.
   \end{enumerate}
 \end{beweis}
 
 \begin{lemma}\label{Lemma33}
-  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homeomorph in $G$.
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
   Betrachtet wird ein Pfad außerhalb von $S$, der zwei Knoten in einem roten Branch-Fan verbindet, welche jedoch nicht beide auf dem gleichen Pfad in $S$ liegen.
   Analog dazu wird ein Pfad außerhalb von $S$ gesucht, der zwei Knoten in einem blauen Branch-Fan verbindet, ohne dass diese beide auf dem gleichen Pfad in $S$ liegen.
   Existieren diese beiden Pfade in $G$, dann enthält $G$ einen \kf-Minor.
@@ -122,19 +126,19 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
 \end{beweis}
 
 \begin{lemma}\label{Lemma34}
-  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homeomorph in $G$.
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
   Betrachtet wird ein Pfad außerhalb von $S$, der zwei innere Knoten paralleler Pfade in $S$ verbindet sowie ein Pfad außerhalb von $S$, dessen Endpunkte nicht beide im gleichen Pfad von $S$ liegen.
   Bestehen die Endpunkte der beiden Pfade aus mindestens drei unterschiedlichen Knoten in $S$, enthält $G$ einen \kf-Minor.
 \end{lemma}
 % TODO: Beweis?
 
 \begin{lemma}\label{Lemma35}
-  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homeomorph in $G$ mit den roten Knoten $R = \{a, b, c\}$ und den blauen Knoten $B = \{x, y, z\}$.
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$ mit den roten Knoten $R = \{a, b, c\}$ und den blauen Knoten $B = \{x, y, z\}$.
   Bilden weder $R$, noch $B$ einen \dd-Separator, enthält $G$ einen \kf-Minor.
 \end{lemma}
 \begin{beweis}
-  Falls $R$ und $B$ keinen \dd-Separator bilden, ist sowohl der Graph $G \cap R$ als auch $G \cap B$ zusammenhängend.
-  Sei $P_1$ ein Pfad, der zwei blaue Branch-Fans in $G \cap R$ und $P_2$ einer, der zwei rote Branch-Fans in $G \cap B$ verbindet.
+  Falls $R$ und $B$ keinen \dd-Separator bilden, ist sowohl der Graph $G \setminus R$ als auch $G \setminus B$ zusammenhängend.
+  Sei $P_1$ ein Pfad, der zwei blaue Branch-Fans in $G \setminus R$ und $P_2$ einer, der zwei rote Branch-Fans in $G \setminus B$ verbindet.
   Beide liegen außerhalb von $S$.
   Die Endpunkte von $P_1$ seien $u_1$ und $v_1$, die von $P_2$ seien $u_2$ und $v_2$.
   $u_1$ und $v_1$ besitzen jeweils einen Pfad in $S$ zu einem der roten Knoten.
@@ -150,7 +154,7 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
 \end{beweis}
 
 \begin{lemma}\label{Lemma36}
-  Sei $G$ ein $3$-zusammenhängender Graph mit einem $W$-Homeomorph.
+  Sei $G$ ein $3$-zusammenhängender Graph mit einem $W$-Homöomorph.
   Ist $G$ nicht isomorph zu $W$, enthält $G$ einen \kf-Minor.
 \end{lemma}
 % Beweis?
@@ -158,7 +162,7 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
 Als nächstes folgt der Beweis zu \ref{Theorem36}.
 \begin{beweis}
   Gezeigt wird, dass falls $S$ keinen \dd-Separator bildet, $G$ entweder einen \kf-Minor enthält oder isomorph zu $W$ ist.
-  Falls kein \kf-Minor enthalten ist, gilt nach Lemma \ref{Lemma35}, dass $G \cap R$ oder $G \cap B$ nicht zusammenhängend ist.
+  Falls kein \kf-Minor enthalten ist, gilt nach Lemma \ref{Lemma35}, dass $G \setminus R$ oder $G \setminus B$ nicht zusammenhängend ist.
   Demnach ist $B$ ein $3$-Separator, der den Graph teilt, aber die Knoten aus $R$ liegen nicht alle in unterschiedlichen Zusammenhangskomponenten.
   Deshalb muss es außerhalb von $S$ mindestens einen Pfad $P_1$ geben, der zwei der roten Knoten in $G - B$ verbindet.
   Analog gibt es einen Pfad $P_2$, der zwei blaue Knoten in $G - R$ verbindet.
@@ -167,5 +171,25 @@ Als nächstes folgt der Beweis zu \ref{Theorem36}.
   Liegen die Endpunkte von $P_1$ beide in einem einzelnen blauen Branch-Fan und die von $P_2$ in einem einzelnen roten, dann enthält $G$ laut Lemma \ref{Lemma33} einen \kf-Minor.
   Liegen die Endpunkte von $P_1$ in parallelen Pfaden von $S$, enthält $G$ laut Lemma \ref{Lemma34} einen \kf-Minor, da die Endpunkte von $P_2$ nicht auf einem Pfad von $S$ liegen (analog falls $P_2$ auf parallelen Pfaden liegt).
   Übrig bleibt die Möglichkeit, dass die Endpunkte der beiden Pfade paarweise identisch sind.
-  Dann ist $G$ ein Homeomorph zu $W$ und enthält laut Lemma \ref{36} keinen \kf-Minor bei Isomorphie zu $W$.
+  Dann ist $G$ ein Homöomorph zu $W$ und enthält laut Lemma \ref{36} keinen \kf-Minor bei Isomorphie zu $W$.
 \end{beweis}
+
+
+\section{Sequenzieller Algorithmus zum Finden von \kf-Minoren}
+\label{sec:sequenzieller_algorithmus_zum_finden_von_kf_minoren}
+
+Da die Theoreme größtenteils auf $3$-zusammenhängenden Graphen arbeiten, muss der Eingabegraph \ggf zunächst angepasst werden, bevor der Planaritätstests angewendet werden kann.
+Ist der Graph $1$-zusammenhängend, gibt es einen Knoten, der einen $(1, j)$-Separator für $j \geq 2$ bildet.
+Genauso müssen zwei Knoten existieren, die einen $(2, j)$-Separator bilden, falls der Graph $2$-zusammenhängend ist.
+In beiden Fällen kann der Separator benutzt werden, um den Graph in $j$ augmentierte Komponenten zu zerlegen.
+Anschließend kann der $3$-Zusammenhang der einzelnen Komponenten rekursiv geprüft werden.
+Sind die Komponenten alle $3$-zusammenhängend, kann auf jede ein Planaritätstest angewendet werden.
+Kezdy und McGuinness verwenden den Williamson-Algoritmus,\cite{Wil84} welcher in Linearzeit für einen Graph einen \kf- \bzw \kdd-Homöomorph ausgibt oder feststellt, dass der Graph planar ist.
+In der Implementierung wird stattdessen der etwas neuere Planaritätstest von Boyer und Myrvold\cite{BoM04} verwendet, der bereits in \OGDF existiert.
+Ergibt der Planaritätstest, dass eine Komponente planar ist, wird sie nicht weiter beachtet.
+Enthält sie einen \kf-Minor, kann der Algorithmus stoppen und diesen ausgeben.
+Wird ein \kdd-Minor gefunden, wird geprüft, welcher der vier Fälle aus Theorem \ref{Theorem36} zutrifft.
+Bei Isomorphie zu $W$ wird die Komponente nicht weiter beachtet.
+Ist der \kdd-Minor ein \dd-Separator in der untersuchten Komponente, kann sie in weitere augmentierte Komponenten zerlegt und der Algorithmus rekursiv darauf angewendet werden.
+Andernfalls müssen genügend Pfade in der Komponente existieren, sodass der \kdd-Minor auch einen \kf-Minor bildet und der Algorithmus ihn ausgeben und anhalten kann.
+Diese Schritte werden solange wiederholt, bis alle augmentierten Komponenten planar, isomorph zu $W$ sind oder ein \kf-Minor gefunden wurde.
