@@ -17,7 +17,7 @@ Anschließend kann der Planaritätstest auf die einzelnen Komponenten rekursiv a
 \label{sec:behandlung_von_kdd_minoren}
 
 Um das zentrale Theorem aus \cite{KeM92}, welches den \kdd-Minor untersucht, zu erklären, wird zunächst die Gültigkeit augmentierter Komponenten behandelt:
-\begin{theorem}\label{Theorem33}
+\begin{theorem}\label{eq:Theorem33}
   Für $k \geq 3$: Sei $G$ ein $k$-zusammenhängender Graph und $C$ ein $k$-Separator in $G$.
   Alle durch $C$ definierten augmentierten Komponenten sind Minoren von $G$, falls es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
 \end{theorem}
@@ -48,33 +48,33 @@ Um das zentrale Theorem aus \cite{KeM92}, welches den \kdd-Minor untersucht, zu 
 \end{beweis}
 
 Als nächstes stellen Kezdy und McGuinness fest, dass im Fall eines \dd-Separators der Graph in augmentierte Komponenten zerlegt werden kann:
-\begin{theorem}\label{Theorem34}
+\begin{theorem}\label{eq:Theorem34}
   Sei $G$ ein $3$-zusammenhängender Graph mit einem \dd-Separator $C$.
   $G$ hat einen \kf-Minor, falls eine der durch $C$ definierten augmentierten Komponenten einen \kf-Minor enthält.
 \end{theorem}
 \begin{beweis}
-  Zunächst kann festgestellt werden, dass falls eine der augmentierten Komponenten einen \kf-Minor enthält, dieser laut Theorem \ref{Theorem33} auch ein Minor von $G$ ist.
+  Zunächst kann festgestellt werden, dass falls eine der augmentierten Komponenten einen \kf-Minor enthält, dieser laut Theorem \ref{eq:Theorem33} auch ein Minor von $G$ ist.
   Es bleibt zu zeigen, dass sich ein \kf-Minor nicht auf zwei augmentierte Komponenten erstreckt, sondern sich ausschließlich in einer befindet.
   Angenommen es gilt \kf \minor $G$ und zwei der Branch-Sets, die den \kf-Minor bilden, befinden sich jeweils vollständig in unterschiedlichen Zusammenhangskomponenten.
   In diesem Fall wäre $C$ ein $3$-Separator in dem gefundenen Minor, was im Widerspruch zu dem $4$-Zusammenhang des \kf steht.
 \end{beweis}
 
 Das zentrale Theorem ist darauf zurückzuführen, dass jeder Graph ohne \kf-Minor durch Cliquen-Summen von Teilgraphen, die planar oder isomorph zu $W$ sind, gebildet werden kann.\cite{Wag37}
-\begin{theorem}\label{Theorem36}
+\begin{theorem}\label{eq:Theorem36}
   Sei $G$ ein $3$-zusammenhängender Graph mit einem \kdd-Homöomorph $S$, dessen Branch-Ends die rote Knotenmenge $R = \{a, b, c\}$ und blaue $B = \{x, y, z\}$ unterteilt sind.
   Eine der folgenden Bedingungen trifft auf $G$ zu:
   \begin{enumerate}
-    \item $G$ enthält einen \kf-Minor.\label{Theorem361}
-    \item $G$ ist isomorph zu $W$.\label{Theorem362}
-    \item $\{a, b, c\}$ bilden einen $3$-Separator, sodass $\{x, y, z\}$ in separaten Komponenten liegen.\label{Theorem363}
-    \item $\{x, y, z\}$ bilden einen $3$-Separator, sodass $\{a, b, c\}$ in separaten Komponenten liegen.\label{Theorem364}
+    \item $G$ enthält einen \kf-Minor.\label{eq:Theorem361}
+    \item $G$ ist isomorph zu $W$.\label{eq:Theorem362}
+    \item $\{a, b, c\}$ bilden einen $3$-Separator, sodass $\{x, y, z\}$ in separaten Komponenten liegen.\label{eq:Theorem363}
+    \item $\{x, y, z\}$ bilden einen $3$-Separator, sodass $\{a, b, c\}$ in separaten Komponenten liegen.\label{eq:Theorem364}
   \end{enumerate}
 \end{theorem}
-Durch die Theoreme \ref{Theorem33} und \ref{Theorem34} wurde gezeigt, dass der Graph in den Fällen \ref{Theorem363} und \ref{Theorem364} in augmentierte Komponenten zerlegt und darauf der Planaritätstest ausgeführt werden kann.
-Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ einen \kf-Minor enthält - also ob Bedingung \ref{Theorem361} zutrifft.
+Durch die Theoreme \ref{eq:Theorem33} und \ref{eq:Theorem34} wurde gezeigt, dass der Graph in den Fällen \ref{eq:Theorem363} und \ref{eq:Theorem364} in augmentierte Komponenten zerlegt und darauf der Planaritätstest ausgeführt werden kann.
+Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ einen \kf-Minor enthält - also ob Bedingung \ref{eq:Theorem361} zutrifft.
 
 % TODO: Bilder zum Lemma und M
-\begin{lemma}\label{Lemma32}
+\begin{lemma}\label{eq:Lemma32}
   Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
   Hat ein Knoten $w$ in $G \setminus S$ drei Pfade zu Knoten in $S$, die nicht alle im selben Branch-Fan liegen, enthält $G$ einen \kf-Minor.
 \end{lemma}
@@ -84,14 +84,14 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
   Sei \oBdA $t$ ein solcher innerer Knoten auf dem Pfad $P(a, x)$.
   Folglich können $u$ und $v$ nicht beide in $F(a)$ oder $F(x)$ liegen, sonst lägen alle drei im gleichen Branch-Fan.
   \begin{enumerate}
-    \item $u$ und $v$ sind nicht im gleichen Branch-Fan wie $t$. \label{Lemma321}
+    \item $u$ und $v$ sind nicht im gleichen Branch-Fan wie $t$. \label{eq:Lemma321}
           Dann müssen $u$ und $v$ ebenfalls innere Knoten sein, im Beispiel auf den Pfaden $P(y, b)$ \bzw $P(z, c)$.
           Es kann ein $M$-Minor durch folgende Kontraktionen erzeugt werden: $u$ mit einem der roten und $v$ mit einem der blauen Knoten (analog $u$ mit blau und $v$ mit rot) sowie $P(w, t)$.
-    \item $u$ oder $v$ liegen auf $P(a, x)$. \label{Lemma322}
+    \item $u$ oder $v$ liegen auf $P(a, x)$. \label{eq:Lemma322}
           Sei \oBdA $u \in P(a, x)$.
           Da $t$ ebenfalls in diesem Pfad liegt, gilt $\{t, u\} \in F(a) \cup F(x)$, sodass $v$ nicht in diesen beiden Branch-Fans liegen kann.
-          Es können $t$ und $v$ getauscht werden, sodass eine Reduktion auf Fall \ref{Lemma321} erreicht wird.
-    \item Entweder $u$ oder $v$ liegen im gleichen Branch-Fan wie $t$. \label{Lemma323}
+          Es können $t$ und $v$ getauscht werden, sodass eine Reduktion auf Fall \ref{eq:Lemma321} erreicht wird.
+    \item Entweder $u$ oder $v$ liegen im gleichen Branch-Fan wie $t$. \label{eq:Lemma323}
           Sei \oBdA $u \in F(x) \setminus P(a, x)$, im Beispiel auf dem Pfad $P(b, x)$.
           Es gilt $\{t, u\} \in F(x)$, weshalb $v$ in einem anderen Branch Fan sein muss.
           Da alle roten Knoten in $F(x)$ liegen, gilt konkreter $v \in (F(y) \cup F(z)) \setminus \{a, b, c\}$
@@ -100,7 +100,7 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
   \end{enumerate}
 \end{beweis}
 
-\begin{lemma}\label{Lemma33}
+\begin{lemma}\label{eq:Lemma33}
   Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
   Betrachtet wird ein Pfad außerhalb von $S$, der zwei Knoten in einem roten Branch-Fan verbindet, welche jedoch nicht beide auf dem gleichen Pfad in $S$ liegen.
   Analog dazu wird ein Pfad außerhalb von $S$ gesucht, der zwei Knoten in einem blauen Branch-Fan verbindet, ohne dass diese beide auf dem gleichen Pfad in $S$ liegen.
@@ -117,7 +117,7 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
           Entsprechend sind die Endpunkte von $P_2$ in unterschiedlichen roten Branch-Fans.
           Werden die Endpunkte von $P_1$ je mit den beiden blauen und die von $P_2$ mit den beiden roten Knoten von $S$ kontrahiert, entsteht ein \kf-Minor. % TODO: Skizze
     \item Die beiden Pfade haben einen gemeinsamen Knoten $w$.
-          Liegt dieser gemeinsame Knoten außerhalb von $S$, kann Lemma \ref{Lemma32} angewendet werden, da die Endpunkte der Pfade nicht alle im gleichen Branch-Fan liegen.
+          Liegt dieser gemeinsame Knoten außerhalb von $S$, kann Lemma \ref{eq:Lemma32} angewendet werden, da die Endpunkte der Pfade nicht alle im gleichen Branch-Fan liegen.
           Liegt $w$ innerhalb von $S$, ist er ein Endpunkt von $P_1$ und $P_2$ und muss auf dem Pfad $P(a, x)$ liegen, da dieser der einzige gemeinsame Pfad ist.
           Sei $P_1 = P(w, u)$ und $P_2 = P(w, v)$.
           Da $u$ nicht in $F(x)$ liegt und $v$ nicht in $F(a)$, gibt es einen Pfad von $u$ zu einem blauen Knoten und von $v$ zu einem roten Knoten, die sich nicht kreuzen und daher kontrahiert werden können.
@@ -125,14 +125,14 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
   \end{enumerate}
 \end{beweis}
 
-\begin{lemma}\label{Lemma34}
+\begin{lemma}\label{eq:Lemma34}
   Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
   Betrachtet wird ein Pfad außerhalb von $S$, der zwei innere Knoten paralleler Pfade in $S$ verbindet sowie ein Pfad außerhalb von $S$, dessen Endpunkte nicht beide im gleichen Pfad von $S$ liegen.
   Bestehen die Endpunkte der beiden Pfade aus mindestens drei unterschiedlichen Knoten in $S$, enthält $G$ einen \kf-Minor.
 \end{lemma}
 % TODO: Beweis?
 
-\begin{lemma}\label{Lemma35}
+\begin{lemma}\label{eq:Lemma35}
   Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$ mit den roten Knoten $R = \{a, b, c\}$ und den blauen Knoten $B = \{x, y, z\}$.
   Bilden weder $R$, noch $B$ einen \dd-Separator, enthält $G$ einen \kf-Minor.
 \end{lemma}
@@ -147,31 +147,31 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
   Anschließend kann je nach vorliegendem Fall die Aussage auf eines der vorherigen Lemmata reduziert werden:
   \begin{enumerate}
     \item $P_1$ oder $P_2$ verbindet zwei parallele Pfade in $S$.
-          In dem Fall kann Lemma \ref{Lemma34} angewendet werden und $G$ enthält einen \kf-Minor.
+          In dem Fall kann Lemma \ref{eq:Lemma34} angewendet werden und $G$ enthält einen \kf-Minor.
     \item Die Endpunkte von $P_1$ liegen in einem einzelnen roten Branch-Fan - analog liegen die von $P_2$ in einem blauen.
-          Nach Lemma \ref{Lemma33} enthält $G$ einen \kf-Minor.
+          Nach Lemma \ref{eq:Lemma33} enthält $G$ einen \kf-Minor.
   \end{enumerate}
 \end{beweis}
 
-\begin{lemma}\label{Lemma36}
+\begin{lemma}\label{eq:Lemma36}
   Sei $G$ ein $3$-zusammenhängender Graph mit einem $W$-Homöomorph.
   Ist $G$ nicht isomorph zu $W$, enthält $G$ einen \kf-Minor.
 \end{lemma}
 % Beweis?
 
-Als nächstes folgt der Beweis zu \ref{Theorem36}.
+Als nächstes folgt der Beweis zu \ref{eq:Theorem36}.
 \begin{beweis}
   Gezeigt wird, dass falls $S$ keinen \dd-Separator bildet, $G$ entweder einen \kf-Minor enthält oder isomorph zu $W$ ist.
-  Falls kein \kf-Minor enthalten ist, gilt nach Lemma \ref{Lemma35}, dass $G \setminus R$ oder $G \setminus B$ nicht zusammenhängend ist.
+  Falls kein \kf-Minor enthalten ist, gilt nach Lemma \ref{eq:Lemma35}, dass $G \setminus R$ oder $G \setminus B$ nicht zusammenhängend ist.
   Demnach ist $B$ ein $3$-Separator, der den Graph teilt, aber die Knoten aus $R$ liegen nicht alle in unterschiedlichen Zusammenhangskomponenten.
   Deshalb muss es außerhalb von $S$ mindestens einen Pfad $P_1$ geben, der zwei der roten Knoten in $G - B$ verbindet.
   Analog gibt es einen Pfad $P_2$, der zwei blaue Knoten in $G - R$ verbindet.
   Da $P_1$ zwei rote Branch-Fans verbindet, liegen seine Endpunkte in zwei verschiedenen Pfaden von $S$.
   Gleiches gilt für die Endpunkte von $P_2$.
-  Liegen die Endpunkte von $P_1$ beide in einem einzelnen blauen Branch-Fan und die von $P_2$ in einem einzelnen roten, dann enthält $G$ laut Lemma \ref{Lemma33} einen \kf-Minor.
-  Liegen die Endpunkte von $P_1$ in parallelen Pfaden von $S$, enthält $G$ laut Lemma \ref{Lemma34} einen \kf-Minor, da die Endpunkte von $P_2$ nicht auf einem Pfad von $S$ liegen (analog falls $P_2$ auf parallelen Pfaden liegt).
+  Liegen die Endpunkte von $P_1$ beide in einem einzelnen blauen Branch-Fan und die von $P_2$ in einem einzelnen roten, dann enthält $G$ laut Lemma \ref{eq:Lemma33} einen \kf-Minor.
+  Liegen die Endpunkte von $P_1$ in parallelen Pfaden von $S$, enthält $G$ laut Lemma \ref{eq:Lemma34} einen \kf-Minor, da die Endpunkte von $P_2$ nicht auf einem Pfad von $S$ liegen (analog falls $P_2$ auf parallelen Pfaden liegt).
   Übrig bleibt die Möglichkeit, dass die Endpunkte der beiden Pfade paarweise identisch sind.
-  Dann ist $G$ ein Homöomorph zu $W$ und enthält laut Lemma \ref{36} keinen \kf-Minor bei Isomorphie zu $W$.
+  Dann ist $G$ ein Homöomorph zu $W$ und enthält laut Lemma \ref{eq:Theorem36} keinen \kf-Minor bei Isomorphie zu $W$.
 \end{beweis}
 
 
@@ -188,8 +188,19 @@ Kezdy und McGuinness verwenden den Williamson-Algoritmus,\cite{Wil84} welcher in
 In der Implementierung wird stattdessen der etwas neuere Planaritätstest von Boyer und Myrvold\cite{BoM04} verwendet, der bereits in \OGDF existiert.
 Ergibt der Planaritätstest, dass eine Komponente planar ist, wird sie nicht weiter beachtet.
 Enthält sie einen \kf-Minor, kann der Algorithmus stoppen und diesen ausgeben.
-Wird ein \kdd-Minor gefunden, wird geprüft, welcher der vier Fälle aus Theorem \ref{Theorem36} zutrifft.
+Wird ein \kdd-Minor gefunden, wird geprüft, welcher der vier Fälle aus Theorem \ref{eq:Theorem36} zutrifft.
 Bei Isomorphie zu $W$ wird die Komponente nicht weiter beachtet.
 Ist der \kdd-Minor ein \dd-Separator in der untersuchten Komponente, kann sie in weitere augmentierte Komponenten zerlegt und der Algorithmus rekursiv darauf angewendet werden.
 Andernfalls müssen genügend Pfade in der Komponente existieren, sodass der \kdd-Minor auch einen \kf-Minor bildet und der Algorithmus ihn ausgeben und anhalten kann.
 Diese Schritte werden solange wiederholt, bis alle augmentierten Komponenten planar, isomorph zu $W$ sind oder ein \kf-Minor gefunden wurde.
+
+\newpage
+\begin{minipage}{\linewidth}
+\lstinputlisting[language=Python,
+                 frame=single,
+                 keywordstyle=\color{blue},
+                 numbers=left,
+                 caption={Algorithmus von Kezdy und McGuinness als Pseudo Code.},
+                 captionpos=b]
+                {algorithmen/Kezdy_McGuinness.py}
+\end{minipage}

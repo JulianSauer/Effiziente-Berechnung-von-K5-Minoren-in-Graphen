@@ -1,0 +1,37 @@
+\begin{tikzpicture}
+\node [circle, minimum height=0.6cm, draw] (v1) at (0,0) {$a$};
+\node [circle, minimum height=0.6cm, draw] (v5) at (0,-1.5) {$b$};
+\node [circle, minimum height=0.6cm, draw] (v6) at (0,-3) {$c$};
+\node [circle, minimum height=0.6cm, draw] (v2) at (2.5,0) {$x$};
+\node [circle, minimum height=0.6cm, draw] (v3) at (2.5,-1.5) {$y$};
+\node [circle, minimum height=0.6cm, draw] (v4) at (2.5,-3) {$z$};
+\draw  (v1) edge (v2);
+\draw  (v1) edge (v3);
+\draw  (v1) edge (v4);
+\draw  (v5) edge (v2);
+\draw  (v5) edge (v3);
+\draw  (v5) edge (v4);
+\draw  (v6) edge (v2);
+\draw  (v6) edge (v3);
+\draw  (v6) edge (v4);
+
+\node [circle, minimum height=0.6cm, draw] (v7) at (-3.5,-0.25) {$a$};
+\node [circle, minimum height=0.6cm, draw] (v8) at (-2,-1.25) {$b$};
+\node [circle, minimum height=0.6cm, draw] (v9) at (-2.5,-3) {$c$};
+\node [circle, minimum height=0.6cm, draw] (v10) at (-4.5,-3) {$d$};
+\node [circle, minimum height=0.6cm, draw] (v11) at (-5,-1.25) {$e$};
+\draw  (v7) edge (v8);
+\draw  (v8) edge (v9);
+\draw  (v9) edge (v10);
+\draw  (v10) edge (v11);
+\draw  (v11) edge (v7);
+\draw  (v7) edge (v9);
+\draw  (v9) edge (v11);
+\draw  (v11) edge (v8);
+\draw  (v8) edge (v10);
+\draw  (v10) edge (v7);
+
+
+\node at (1.25,-4) {$K_{3, 3}$};
+\node at (-3.5,-4) {$K_5$};
+\end{tikzpicture}
