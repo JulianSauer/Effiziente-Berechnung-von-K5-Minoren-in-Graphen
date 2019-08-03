@@ -73,7 +73,6 @@ Das zentrale Theorem ist darauf zurückzuführen, dass jeder Graph ohne \kf-Mino
 Durch die Theoreme \ref{eq:Theorem33} und \ref{eq:Theorem34} wurde gezeigt, dass der Graph in den Fällen \ref{eq:Theorem363} und \ref{eq:Theorem364} in augmentierte Komponenten zerlegt und darauf der Planaritätstest ausgeführt werden kann.
 Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ einen \kf-Minor enthält - also ob Bedingung \ref{eq:Theorem361} zutrifft.
 
-% TODO: Bilder zum Lemma und M
 \begin{lemma}\label{eq:Lemma32}
   Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
   Hat ein Knoten $w$ in $G \setminus S$ drei Pfade zu Knoten in $S$, die nicht alle im selben Branch-Fan liegen, enthält $G$ einen \kf-Minor.
@@ -99,6 +98,24 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
           Wird $P(w, t)$ ebenfalls kontrahiert, entsteht erneut ein $M$-Minor.
   \end{enumerate}
 \end{beweis}
+\begin{figure}[H]
+  \centering
+  \includegraphics[keepaspectratio]{bilder/Lemma321.pdf}
+  \caption{Beispiel zum ersten Fall von Lemma \ref{eq:Lemma32}.}
+  \label{fig:Lemma321}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[keepaspectratio]{bilder/Lemma322.pdf}
+  \caption{Beispiel zum zweiten Fall von Lemma \ref{eq:Lemma32}.}
+  \label{fig:Lemma322}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[keepaspectratio]{bilder/Lemma323.pdf}
+  \caption{Beispiel zum dritten Fall von Lemma \ref{eq:Lemma32}.}
+  \label{fig:Lemma323}
+\end{figure}
 
 \begin{lemma}\label{eq:Lemma33}
   Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
@@ -112,18 +129,36 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
   Da laut Bedingung die Endpunkte nicht in einem einzelnen Pfad von $S$ liegen, kann $a$ kein Endpunkt von $P_1$ und $x$ kein Endpunkt von $P_2$ sein.
   Es ergeben sich zwei Fälle:
   \begin{enumerate}
-    \item Die beiden Pfade haben keine gemeinsamen Knoten
+    \item Die beiden Pfade haben keine gemeinsamen Knoten.
           Da $P_1$ beide Endpunkte in $F(a)$ hat, liegen diese beiden Endpunkte in zwei unterschiedlichen blauen Branch-Fans.
           Entsprechend sind die Endpunkte von $P_2$ in unterschiedlichen roten Branch-Fans.
-          Werden die Endpunkte von $P_1$ je mit den beiden blauen und die von $P_2$ mit den beiden roten Knoten von $S$ kontrahiert, entsteht ein \kf-Minor. % TODO: Skizze
+          Werden die Endpunkte von $P_1$ je mit den beiden blauen und die von $P_2$ mit den beiden roten Knoten von $S$ kontrahiert, entsteht ein \kf-Minor.
+          Abbildung \ref{fig:Lemma331} skizziert den Fall beispielhaft.
     \item Die beiden Pfade haben einen gemeinsamen Knoten $w$.
           Liegt dieser gemeinsame Knoten außerhalb von $S$, kann Lemma \ref{eq:Lemma32} angewendet werden, da die Endpunkte der Pfade nicht alle im gleichen Branch-Fan liegen.
-          Liegt $w$ innerhalb von $S$, ist er ein Endpunkt von $P_1$ und $P_2$ und muss auf dem Pfad $P(a, x)$ liegen, da dieser der einzige gemeinsame Pfad ist.
+          Liegt $w$ innerhalb von $S$, ist er ein Endpunkt von $P_1$ und $P_2$ und muss auf dem Pfad $P(a, x)$ liegen, da dieser der einzige gemeinsame Pfad ist, siehe links in \ref{fig:Lemma332}.
           Sei $P_1 = P(w, u)$ und $P_2 = P(w, v)$.
           Da $u$ nicht in $F(x)$ liegt und $v$ nicht in $F(a)$, gibt es einen Pfad von $u$ zu einem blauen Knoten und von $v$ zu einem roten Knoten, die sich nicht kreuzen und daher kontrahiert werden können.
-          Durch die Kontraktion dieser beiden Pfade entsteht ein $M$-Minor. % TODO: Skizze
+          Durch die Kontraktion dieser beiden Pfade entsteht, wie in Abbildung \ref{fig:Lemma332} rechts zu sehen, ein $M$-Minor.
   \end{enumerate}
 \end{beweis}
+\begin{figure}[H]
+  \centering
+  \includegraphics[keepaspectratio]{bilder/Lemma331.pdf}
+  \caption{Beispiel zum ersten Fall von Lemma \ref{eq:Lemma33}.
+           Links ist $S$ mit zwei zusätzlichen Pfaden aus $G$ abgebildet.
+           $P_1$ hat beide Endpunkte in $F(a)$ sowie den blauen Branch-Fans $F(x)$ und $F(y)$, mit denen die Endpunkte kontrahiert werden.
+           $P_2$ hat seine Endpunkte in den roten Branch-Fans $F(b)$ und $F(c)$, mit denen sie kontrahiert werden.
+           In der Mitte ist der dadurch entstehende Minor abgebildet und rechts wird davon ein \kf-Minor gezeigt.}
+  \label{fig:Lemma331}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[keepaspectratio]{bilder/Lemma332.pdf}
+  \caption{Beispiel zum zweiten Fall von Lemma \ref{eq:Lemma33}.
+           Rechts ist der enthaltene $M$-Minor abgebildet.}
+  \label{fig:Lemma332}
+\end{figure}
 
 \begin{lemma}\label{eq:Lemma34}
   Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
@@ -142,7 +177,7 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
   Beide liegen außerhalb von $S$.
   Die Endpunkte von $P_1$ seien $u_1$ und $v_1$, die von $P_2$ seien $u_2$ und $v_2$.
   $u_1$ und $v_1$ besitzen jeweils einen Pfad in $S$ zu einem der roten Knoten.
-  Foglich gibt es einen dritten roten Knoten, der keinen solchen Pfad besitzt - $u_2$ wird so gewählt, dass er in dem Branch-Fan dieses Knotens liegt. % TODO Skizze
+  Foglich gibt es einen dritten roten Knoten, der keinen solchen Pfad besitzt - $u_2$ wird so gewählt, dass er in dem Branch-Fan dieses Knotens liegt.
   Demnach sind $u_1$, $v_1$ und $u_2$ unterschiedliche Knoten.
   Anschließend kann je nach vorliegendem Fall die Aussage auf eines der vorherigen Lemmata reduziert werden:
   \begin{enumerate}
@@ -170,7 +205,7 @@ Als nächstes folgt der Beweis zu \ref{eq:Theorem36}.
   Gleiches gilt für die Endpunkte von $P_2$.
   Liegen die Endpunkte von $P_1$ beide in einem einzelnen blauen Branch-Fan und die von $P_2$ in einem einzelnen roten, dann enthält $G$ laut Lemma \ref{eq:Lemma33} einen \kf-Minor.
   Liegen die Endpunkte von $P_1$ in parallelen Pfaden von $S$, enthält $G$ laut Lemma \ref{eq:Lemma34} einen \kf-Minor, da die Endpunkte von $P_2$ nicht auf einem Pfad von $S$ liegen (analog falls $P_2$ auf parallelen Pfaden liegt).
-  Übrig bleibt die Möglichkeit, dass die Endpunkte der beiden Pfade paarweise identisch sind.
+  Übrig bleibt die Möglichkeit, dass die Endpunkte der beiden Pfade paarweise identisch sind, siehe rechts in Abbildung \ref{fig:W}.
   Dann ist $G$ ein Homöomorph zu $W$ und enthält laut Lemma \ref{eq:Theorem36} keinen \kf-Minor bei Isomorphie zu $W$.
 \end{beweis}
 
