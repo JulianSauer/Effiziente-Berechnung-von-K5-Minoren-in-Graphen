@@ -22,7 +22,7 @@ Analog kann, wie in Abbildung \ref{fig:Pfadkontraktion} gezeigt, ein Pfad kontra
   \label{fig:Pfadkontraktion}
 \end{wrapfigure}
 
-Der Minor $H$ eines Graphen $G$ entsteht, indem auf $G$ eine beliebige Menge an Operationen wie Kantenkontraktionen, das Löschen von Kanten und das Löschen von Knoten ohne Nachbarn angewendet wird.
+Ein Minor $H$ eines Graphen $G$ bezeichnet einen Graph, der isomorph zu $G$ ist, nachdem eine beliebige Menge an Operationen von Kantenkontraktionen, Kantenentfernungen und Knotenentfernungen durchgeführt wurde.
 Ein Beispiel dazu findet sich in Abbildung \ref{fig:Minor}.
 Jeder Graph ist sein eigener Minor, genauso ist jeder Teilgraph ein gültiger Minor.
 Dass $H$ ein Minor von $G$ ist, wird dargestellt durch $H$ \minor $G$.
@@ -46,9 +46,9 @@ Für eine Kante $e = (u, v)$ bedeute das, dass $e$ entfernt wird, dafür ein neu
   \label{fig:K5}
 \end{wrapfigure}
 Ein Graph wird als planar bezeichnet, wenn er sich so in der Ebene einbetten lässt, dass sich keine Kanten kreuzen.
-Ein \kf (\sAbb \ref{fig:K5}) ist ein spezieller Graph, der aus fünf Knoten besteht, die alle miteinander verbunden sind.
+Ein \kf (\sAbb \ref{fig:K5}) ist ein spezieller Graph, der aus fünf Knoten besteht, die alle zueinander adjazent sind.
 Ein \kdd (\sAbb \ref{fig:K33}) ist ein vollständig bipartiter Graph mit sechs Knoten.
-Er lässt sich also in zwei Knotenmengen unterteilen (im Folgenden als rote und blaue Menge bezeichnet), sodass alle Knoten der einen Menge mit allen Knoten der anderen Menge verbunden sind.
+Er lässt sich also in zwei Knotenmengen unterteilen (im Folgenden als rote und blaue Menge bezeichnet), sodass alle Knoten der einen Menge zu allen Knoten der anderen Menge benachbart sind.
 Nach dem Satz von Kuratowski ist ein Graph planar, wenn er kein \kf- oder \kdd-Homöomorph als Teilgraph beinhaltet.
 Eine alternative Formulierung von Wagner sagt aus, dass ein Graph planar ist, wenn er keinen \kf-Minor oder \kdd-Minor enthält.\cite{Die12}
 \begin{wrapfigure}{r}{4cm}
@@ -66,7 +66,7 @@ Bezeichnet werden dadurch alle Pfade, die zu einem anderen Branch-End führen - 
 
 
 Der Graph $W$ bezeichnet einen speziellen Graph, der aus acht Knoten besteht.
-Seine Knoten sind im Kreis verbunden sowie mit den jeweils gegenüberliegenden, diese Darstellung findet sich links in Abbildung \ref{fig:W}.
+Seine äußeren Kanten bilden einen Kreis, außerdem sind die Knoten jeweils adjazent zu den gegenüberliegenden. Eine Darstellung findet sich links in Abbildung \ref{fig:W}.
 Er enthält einen \kdd als Minor (in der Abbildung rechts angedeutet), jedoch keinen \kf.
 Als $M$ wird ein Graph bezeichnet, der einen \kdd als Teilgraph enthält, jedoch einen zusätzlichen Knoten und zwei zusätzliche Kanten enthält.
 Er ist insofern interessant, als dass er, wie in Abbildung \ref{fig:M} zu sehen, neben einem \kdd-Minor auch einen \kf-Minor enthält.
@@ -84,9 +84,8 @@ Er ist insofern interessant, als dass er, wie in Abbildung \ref{fig:M} zu sehen,
   \label{fig:W}
 \end{figure}
 
-
-Als $(i)$-Separator wird eine Menge von $i$ Knoten aus $G$ bezeichnet, die den Graph in mehrere Zusammenhangskomponenten zerlegt, falls diese Knoten aus $G$ entfernt werden.
-Ein $(i, j)$-Separator ist ein $i$-Separator, der $G$ in mindestens $j$ Zusammenhangskomponenten zerlegt.
+Als $(i)$-Separator wird eine Menge $S$ bestehend aus $i$ Knoten in einem zusammenhängenden Graph $G$ bezeichnet, sodass $G \setminus S$ nicht mehr zusammenhängend ist.
+Ein $(i, j)$-Separator ist ein $i$-Separator, sodass $G-S$ aus mindestens $j$ Zusammenhangskomponenten besteht.
 In Abbildung \ref{fig:AugmentierteKomponenten} wird ein \dd-Separator im linken Graph gezeigt.
 Durch einen Separator können augmentierte Komponenten definiert werden:
 Sind $C \in V$ die $i$ Knoten, die zu einem $(i, j)$-Separator in $G$ gehören, wird der Graph durch $G \setminus C$ zunächst in $j$ Zusammenhangskomponenten zerlegt.

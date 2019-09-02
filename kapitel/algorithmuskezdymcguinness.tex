@@ -5,11 +5,12 @@
 Da die Arbeit auf dem sequenziellen Algorithmus von Kezdy und McGuinness, den sie in \cite{KeM92} vorstellen, beruht, wird er im Folgenden erklärt.
 Als Eingabe wird ein ungerichteter Graph ohne Mehrfachkanten erwartet, ausgegeben wird, ob ein $K_5$-Minor enthalten ist oder nicht.
 Für den Fall, dass einer gefunden wurde, kann zusätzlich ausgegeben werden, welche Knoten den Minor formen.
-Die Laufzeit liegt in $\mathcal{O}(n^2)$
+Die Laufzeit liegt in $\mathcal{O}(n^2)$.
 
-Planaritätstests können bereits in linearer Laufzeit entscheiden, ob ein Graph planar ist oder einen \kf- \bzw \kdd-Minor enthält.
-Es muss lediglich der Fall behandelt werden, in dem der der Test stoppt, weil er einen \kdd-Minor gefunden hat, denn es kann nicht garantiert werden, ob zusätzlich ein \kf-Minor enthalten ist.
-Als Lösung testet der Algoritmus von Kezdy und McGuinness, ob ein gefundener \kdd-Minor ein \dd-Separator ist und zerlegt \ggf den Graph in augmentierte Komponenten.
+Planaritätstests können bereits in linearer Laufzeit entscheiden, ob ein Graph einen \kf- oder \kdd-Minor enthält.
+Es muss folglich der Fall behandelt werden, in dem der Test stoppt, weil er einen \kdd-Minor gefunden hat.
+Denn es kann nicht garantiert werden, ob zusätzlich ein \kf-Minor enthalten ist.
+Als Lösung testet der Algoritmus von Kezdy und McGuinness, ob drei der Knoten eines gefundenen \kdd-Minor einen \dd-Separator bilden und teilt den Graph in augmentierte Komponenten auf.
 Anschließend kann der Planaritätstest auf die einzelnen Komponenten rekursiv angewendet werden.
 
 
@@ -19,10 +20,10 @@ Anschließend kann der Planaritätstest auf die einzelnen Komponenten rekursiv a
 Um das zentrale Theorem aus \cite{KeM92}, welches den \kdd-Minor untersucht, zu erklären, wird zunächst die Gültigkeit augmentierter Komponenten behandelt:
 \begin{theorem}\label{eq:Theorem33}
   Für $k \geq 3$: Sei $G$ ein $k$-zusammenhängender Graph und $C$ ein $k$-Separator in $G$.
-  Alle durch $C$ definierten augmentierten Komponenten sind Minoren von $G$, falls es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
+  Alle durch $C$ definierten augmentierten Komponenten sind Minoren von $G$ \gdw es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
 \end{theorem}
 \begin{beweis}
-  Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ \bzw $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G \setminus C$ entstehen.
+  Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ beziehungsweise $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G \setminus C$ entstehen.
   Die zugehörigen augmentierten Komponenten seien $A_1, A_2, ..., A_k$ \bzw $A_1, A_2, ..., A_{k-1}$.
   Betrachtet wird eine beliebige dieser augmentierten Komponenten $A_i$.
   Der Definition der augmentierten Komponenten nach finden sich bereits alle Knoten von $A_i$ in $G$ wieder. % Teilgraph
@@ -46,11 +47,21 @@ Um das zentrale Theorem aus \cite{KeM92}, welches den \kdd-Minor untersucht, zu 
           Da der Graph $k$-zusammenhängend ist, sind mindestens zwei dieser Knoten mit allen in $C$ verbunden, sodass sie durch Kontraktionen mit zwei unterschiedlichen Knoten aus $C$ genutzt werden könnenm um die gesuchte Clique zu erzeugen.
   \end{enumerate}
 \end{beweis}
+\begin{figure}[H]
+  \centering
+  \includegraphics[keepaspectratio]{bilder/Theorem33.pdf}
+  \caption{Gegenbeispiel zu Theorem \ref{eq:Theorem33} für  $k=3$ mit $C=\{a, d, f\}$ in $W$, wodurch die $k-1$ Komponenten $A_1$ und $A_2$ entstehen, von denen nur eine aus mehr als einem Knoten besteht.
+           Die Komponente $A_1$ ist zwar ein gültiger Minor, da sie etwa durch die Kontraktionen der Kanten $(a, b), (a, h), (f, g)$ und $(c, d)$ aus $W$ erzeugt werden kann.
+           $A_2$ dagegen kann nicht durch Kontraktionen aus $W$ erzeugt werden - wird beispielsweise die Kante $(d, e)$ in $W$ kontrahiert, fehlt die Kante $(a, f)$ in $A_2$.
+           Analog kann $e$ mit keiner seiner inzidenten Kanten kontrahiert werden, um einen zu $A_2$ isomorphen Graph zu erhalten.}
+  \label{fig:Theorem33}
+\end{figure}
+
 
 Als nächstes stellen Kezdy und McGuinness fest, dass im Fall eines \dd-Separators der Graph in augmentierte Komponenten zerlegt werden kann:
 \begin{theorem}\label{eq:Theorem34}
   Sei $G$ ein $3$-zusammenhängender Graph mit einem \dd-Separator $C$.
-  $G$ hat einen \kf-Minor, falls eine der durch $C$ definierten augmentierten Komponenten einen \kf-Minor enthält.
+  $G$ hat einen \kf-Minor \gdw eine der durch $C$ definierten augmentierten Komponenten einen \kf-Minor enthält.
 \end{theorem}
 \begin{beweis}
   Zunächst kann festgestellt werden, dass falls eine der augmentierten Komponenten einen \kf-Minor enthält, dieser laut Theorem \ref{eq:Theorem33} auch ein Minor von $G$ ist.
@@ -61,7 +72,7 @@ Als nächstes stellen Kezdy und McGuinness fest, dass im Fall eines \dd-Separato
 
 Das zentrale Theorem ist darauf zurückzuführen, dass jeder Graph ohne \kf-Minor durch Cliquen-Summen von Teilgraphen, die planar oder isomorph zu $W$ sind, gebildet werden kann.\cite{Wag37}
 \begin{theorem}\label{eq:Theorem36}
-  Sei $G$ ein $3$-zusammenhängender Graph mit einem \kdd-Homöomorph $S$, dessen Branch-Ends die rote Knotenmenge $R = \{a, b, c\}$ und blaue $B = \{x, y, z\}$ unterteilt sind.
+  Sei $G$ ein $3$-zusammenhängender Graph, der ein \kdd-Homöomorph $S$ enthält, dessen Branch-Ends in die rote Knotenmenge $R = \{a, b, c\}$ und blaue $B = \{x, y, z\}$ unterteilt sind.
   Eine der folgenden Bedingungen trifft auf $G$ zu:
   \begin{enumerate}
     \item $G$ enthält einen \kf-Minor.\label{eq:Theorem361}
@@ -75,7 +86,7 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
 
 \begin{lemma}\label{eq:Lemma32}
   Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
-  Hat ein Knoten $w$ in $G \setminus S$ drei Pfade zu Knoten in $S$, die nicht alle im selben Branch-Fan liegen, enthält $G$ einen \kf-Minor.
+  Enthält $G$ drei Pfade von einem Knoten $w \in G \setminus S$ zu drei Knoten in $S$, die nicht alle im selben Branch-Fan liegen, enthält $G$ einen \kf-Minor.
 \end{lemma}
 \begin{beweis}
   Seien $t, u, v$ die drei Endpunkte der Pfade in $S$.
