@@ -28,7 +28,7 @@ Jeder Graph ist sein eigener Minor, genauso ist jeder Teilgraph ein gültiger Mi
 Dass $H$ ein Minor von $G$ ist, wird dargestellt durch $H$ \minor $G$.
 Das Branch-Set eines Knotens $w$ aus einem Minor von $G$ bezeichnet die Menge an Knoten, die durch Kontraktionen zu $w$ verschmolzen wurden.
 In Abbildung \ref{fig:Minor} besteht beispielsweise das Branch-Set von $g$ aus $\{a, b, c\}$, zu $f$ in $H_2$ gehört die Knotenmenge $\{f\}$ in $G$.
-Für die Knotenmenge $U \in V$ bezeichnet $G \setminus U$ den Teilgraph, der entsteht, wenn alle Knoten aus $U$ mit ihren inzidenten Kanten aus $G$ entfernt werden.
+Für die Knotenmenge $U \in V$ bezeichnet $G - U$ den Teilgraph, der entsteht, wenn alle Knoten aus $U$ mit ihren inzidenten Kanten aus $G$ entfernt werden.
 Ein Homöomorph eines Graphen $G$ enthält alle Knoten und Kanten aus $G$, zusätzlich können aber Kanten als gegenteilige Operation zur Kontraktion unterteilt werden.
 Für eine Kante $e = (u, v)$ bedeute das, dass $e$ entfernt wird, dafür ein neuer Knoten $w$ und zwei neue Kanten $(u, w)$ und $(w, v)$ eingefügt werden.
 \begin{figure}[H]
@@ -81,18 +81,18 @@ Er ist insofern interessant, als dass er, wie in Abbildung \ref{fig:M} zu sehen,
   \centering
   \includegraphics[keepaspectratio]{bilder/M.pdf}
   \caption{Der Graph $M$ sowie ein \kf-Minor aus $M$.}
-  \label{fig:W}
+  \label{fig:M}
 \end{figure}
 
-Als $(i)$-Separator wird eine Menge $S$ bestehend aus $i$ Knoten in einem zusammenhängenden Graph $G$ bezeichnet, sodass $G \setminus S$ nicht mehr zusammenhängend ist.
+Als $(i)$-Separator wird eine Menge $S$ bestehend aus $i$ Knoten in einem zusammenhängenden Graph $G$ bezeichnet, sodass $G - S$ nicht mehr zusammenhängend ist.
 Ein $(i, j)$-Separator ist ein $i$-Separator, sodass $G-S$ aus mindestens $j$ Zusammenhangskomponenten besteht.
 In Abbildung \ref{fig:AugmentierteKomponenten} wird ein \dd-Separator im linken Graph gezeigt.
 Durch einen Separator können augmentierte Komponenten definiert werden:
-Sind $C \in V$ die $i$ Knoten, die zu einem $(i, j)$-Separator in $G$ gehören, wird der Graph durch $G \setminus C$ zunächst in $j$ Zusammenhangskomponenten zerlegt.
+Sind $C \in V$ die $i$ Knoten, die zu einem $(i, j)$-Separator in $G$ gehören, wird der Graph durch $G - C$ zunächst in $j$ Zusammenhangskomponenten zerlegt.
 Anschließend werden Kopien der Knoten aus $C$ zu jeder Komponente hinzugefügt.
 Sie bilden dabei in jeder Zusammenhangskomponente eine Clique.
 Außerdem besitzen sie Kanten zu Knoten in der Zusammenhangskomponente, falls eine Kante $e = (c, z)$ in $G$ existierte, $c \in C$ und $z$ ein Knoten der Zusammenhangskomponente ist.
-Jeder der resultierenden Graphen ist eine augmentierte Komponente des Urpsrungsgraphen $G$ und wie in Theorem \ref{Theorem33} bewiesen wird, \evtl ein Minor zu $G$.
+Jeder der resultierenden Graphen ist eine augmentierte Komponente des Urpsrungsgraphen $G$ und wie in Theorem \ref{eq:Theorem33} bewiesen wird, \evtl ein Minor zu $G$.
 Als gegenteilige Operation kann eine Cliquen-Summe verwendet werden, um zwei Graphen zu verschmelzen.
 Dazu müssen zwei Graphen $H_1$ und $H_2$ als Teilgraph eine gleich große Clique enthalten.
 $H_1$ und $H_2$ können zu einem Graph zusammengefügt werden, indem je ein Knoten von der Clique in $H_1$ und in $H_2$ zu einem zusammengefügt werden.

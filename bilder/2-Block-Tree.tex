@@ -1,0 +1,127 @@
+\begin{tikzpicture}
+
+\node [circle, minimum height=0.75cm, draw] (v1) at (0,-0.5) {$a$};
+\node [circle, minimum height=0.75cm, draw] (v2) at (2,-1.5) {$c$};
+\node [circle, minimum height=0.75cm, draw] (v3) at (2,-4.5) {$h$};
+\node [circle, minimum height=0.75cm, draw] (v4) at (0,-5.5) {$j$};
+\node [circle, minimum height=0.75cm, draw] (v5) at (-2,-4.5) {$g$};
+\node [circle, minimum height=0.75cm, draw] (v6) at (-2,-1.5) {$b$};
+\node [circle, minimum height=0.75cm, draw] (v7) at (0,-3) {$e$};
+\node [circle, minimum height=0.75cm, draw] (v8) at (5,-1.5) {$d$};
+\node [circle, minimum height=0.75cm, draw] (v9) at (5,-4.5) {$i$};
+\node [circle, minimum height=0.75cm, draw] (v12) at (3.5,-3) {$f$};
+\node [circle, minimum height=0.75cm, draw] (v11) at (2,-7.5) {$l$};
+\node [circle, minimum height=0.75cm, draw] (v10) at (5,-7.5) {$m$};
+\node [circle, minimum height=0.75cm, draw] (v13) at (3.5,-6) {$k$};
+\draw  (v1) edge (v2);
+\draw  (v3) edge (v4);
+\draw  (v4) edge (v5);
+\draw  (v5) edge (v6);
+\draw  (v6) edge (v1);
+\draw  (v7) edge (v1);
+\draw  (v7) edge (v2);
+\draw  (v7) edge (v3);
+\draw  (v7) edge (v4);
+\draw  (v7) edge (v5);
+\draw  (v7) edge (v6);
+\draw  (v2) edge (v8);
+\draw  (v8) edge (v9);
+\draw  (v9) edge (v10);
+\draw  (v10) edge (v11);
+\draw  (v11) edge (v3);
+\draw  (v3) edge (v9);
+\draw  (v12) edge (v2);
+\draw  (v12) edge (v8);
+\draw  (v12) edge (v9);
+\draw  (v12) edge (v3);
+\draw  (v9) edge (v13);
+\draw  (v13) edge (v11);
+
+
+\node [circle, minimum height=0.75cm, draw] (v19) at (-7,-9.5) {$b$};
+\node [circle, minimum height=0.75cm, draw] (v14) at (-5,-8.5) {$a$};
+\node [circle, minimum height=0.75cm, draw] (v15) at (-3,-9.5) {$c$};
+\node [circle, minimum height=0.75cm, draw] (v16) at (-3,-12.5) {$h$};
+\node [circle, minimum height=0.75cm, draw] (v17) at (-5,-13.5) {$j$};
+\node [circle, minimum height=0.75cm, draw] (v18) at (-7,-12.5) {$g$};
+\node [circle, minimum height=0.75cm, draw] (v20) at (-5,-11) {$e$};
+\draw  (v14) edge (v15);
+\draw  (v15) edge (v16);
+\draw  (v16) edge (v17);
+\draw  (v17) edge (v18);
+\draw  (v18) edge (v19);
+\draw  (v19) edge (v14);
+\draw  (v20) edge (v14);
+\draw  (v20) edge (v15);
+\draw  (v20) edge (v16);
+\draw  (v20) edge (v17);
+\draw  (v20) edge (v18);
+\draw  (v20) edge (v19);
+
+\node [circle, minimum height=0.75cm, draw] (v21) at (-0.5,-10) {$c$};
+\node [circle, minimum height=0.75cm, draw] (v22) at (-0.5,-12) {$h$};
+\draw  (v21) edge (v22);
+
+\node [circle, minimum height=0.75cm, draw] (v23) at (2,-9.5) {$c$};
+\node [circle, minimum height=0.75cm, draw] (v24) at (5,-9.5) {$d$};
+\node [circle, minimum height=0.75cm, draw] (v27) at (3.5,-11) {$f$};
+\node [circle, minimum height=0.75cm, draw] (v26) at (2,-12.5) {$h$};
+\node [circle, minimum height=0.75cm, draw] (v25) at (5,-12.5) {$i$};
+\draw  (v23) edge (v24);
+\draw  (v24) edge (v25);
+\draw  (v25) edge (v26);
+\draw  (v26) edge (v23);
+\draw  (v27) edge (v23);
+\draw  (v27) edge (v24);
+\draw  (v27) edge (v25);
+\draw  (v27) edge (v26);
+
+
+\node [circle, minimum height=0.75cm, draw] (v28) at (2.5,-15) {$h$};
+\node [circle, minimum height=0.75cm, draw] (v29) at (4.5,-15) {$i$};
+\draw  (v28) edge (v29);
+
+\node [circle, minimum height=0.75cm, draw] (v30) at (2.25,-17.75) {$h$};
+\node [circle, minimum height=0.75cm, draw] (v31) at (5.25,-17.75) {$i$};
+\node [circle, minimum height=0.75cm, draw] (v32) at (2.25,-20.75) {$l$};
+\draw  (v30) edge (v31);
+\draw  (v31) edge (v32);
+\draw  (v32) edge (v30);
+
+\node [circle, minimum height=0.75cm, draw] (v33) at (7.5,-21) {$i$};
+\node [circle, minimum height=0.75cm, draw] (v34) at (5.5,-23) {$l$};
+\draw  (v33) edge (v34);
+
+\node [circle, minimum height=0.75cm, draw] (v35) at (3.5,-24.5) {$l$};
+\node [circle, minimum height=0.75cm, draw] (v36) at (2,-26) {$k$};
+\node [circle, minimum height=0.75cm, draw] (v37) at (0.5,-27.5) {$l$};
+\draw  (v35) edge (v36);
+\draw  (v36) edge (v37);
+\draw [bend left] (v37) edge (v35);
+
+\node [circle, minimum height=0.75cm, draw] (v38) at (10.75,-23.25) {$i$};
+\node [circle, minimum height=0.75cm, draw] (v40) at (7.75,-26.25) {$l$};
+\node [circle, minimum height=0.75cm, draw] (v39) at (10.75,-26.25) {$m$};
+\draw  (v38) edge (v39);
+\draw  (v39) edge (v40);
+\draw  (v40) edge (v38);
+
+
+\node [circle, minimum height=6cm, draw] (v41) at (-5,-11) {};
+\node [circle, minimum height=5.3cm, draw] (v43) at (3.5,-11) {};
+\node [circle, minimum height=5.5cm, draw] (v45) at (3.5,-19) {};
+\node [circle, minimum height=5.3cm, draw] (v47) at (2,-26) {};
+\node [circle, minimum height=5.5cm, draw] (v48) at (9.5,-25) {};
+
+\node [ellipse, minimum height=3.5cm, minimum width=1.5cm, draw] (v42) at (-0.5,-11) {};
+\node [ellipse, minimum height=1.5cm, minimum width=3.5cm, draw] (v44) at (3.5,-15) {};
+\node [ellipse, minimum height=1.7cm, minimum width=4.2cm, rotate=45, draw] (v46) at (6.5,-22) {};
+
+\draw  (v41) edge (v42);
+\draw  (v42) edge (v43);
+\draw  (v43) edge (v44);
+\draw  (v44) edge (v45);
+\draw  (v45) edge (v46);
+\draw  (v46) edge (v47);
+\draw  (v46) edge (v48);
+\end{tikzpicture}
