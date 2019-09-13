@@ -234,7 +234,7 @@ In beiden Fällen kann der Separator benutzt werden, um den Graph in $j$ augment
 Anschließend kann der $3$-Zusammenhang der einzelnen Komponenten rekursiv geprüft werden.
 Sind die Komponenten alle $3$-zusammenhängend, kann auf jede ein Planaritätstest angewendet werden.
 Kezdy und McGuinness verwenden den Williamson-Algoritmus,\cite{Wil84} welcher in Linearzeit für einen Graph einen \kf- \bzw \kdd-Homöomorph ausgibt oder feststellt, dass der Graph planar ist.
-In der Implementierung wird stattdessen der etwas neuere Planaritätstest von Boyer und Myrvold\cite{BoM04} verwendet, der bereits in \OGDF existiert.
+In der Implementierung wird stattdessen der Planaritätstest von Boyer und Myrvold\cite{BoM04} verwendet, der bereits in \OGDF existiert.
 Ergibt der Planaritätstest, dass eine Komponente planar ist, wird sie nicht weiter beachtet.
 Enthält sie einen \kf-Minor, kann der Algorithmus stoppen und diesen ausgeben.
 Wird ein \kdd-Minor gefunden, wird geprüft, welcher der vier Fälle aus Theorem \ref{eq:Theorem36} zutrifft.
@@ -244,12 +244,35 @@ Andernfalls müssen genügend Pfade in der Komponente existieren, sodass der \kd
 Diese Schritte werden solange wiederholt, bis alle augmentierten Komponenten planar, isomorph zu $W$ sind oder ein \kf-Minor gefunden wurde.
 
 \newpage
-\begin{minipage}{\linewidth}
-\lstinputlisting[language=Python,
-                 frame=single,
-                 keywordstyle=\color{blue},
-                 numbers=left,
-                 caption={Algorithmus von Kezdy und McGuinness als Pseudo Code.},
-                 captionpos=b]
-                {algorithmen/Kezdy_McGuinness.py}
-\end{minipage}
+Für einen schlichten Graph $G$ sind die einzelnen Schritte zusammengefasst:
+\begin{enumerate}
+  \item \label{item:algorithmus11} Solange es $1$-Separatoren gibt: Erzeuge augmentierte Komponenten mit diesen Separatoren.
+  \item \label{item:algorithmus12} Solange es $2$-Separatoren gibt: Erzeuge augmentierte Komponenten mit diesen Separatoren.
+\end{enumerate}
+Für alle $j$ Zusammenhangskomponenten $Z_i$ von $G$:
+\begin{enumerate}[resume]
+  \item \label{item:algorithmus13} Planaritätstest:
+                                   \begin{enumerate}
+                                     \item $Z_i$ ist planar: Falls $i<j$ behandle $Z_{i+1}$ in Schritt \ref{item:algorithmus13}, sonst stopp.
+                                     \item $Z_i$ enthält ein \kf-Homöomorph: Stopp
+                                     \item $Z_i$ enthält ein \kdd-Homöomorph: Weiter zu Schritt \ref{item:algorithmus14}
+                                   \end{enumerate}
+  \item \label{item:algorithmus14} $Z_i$ ist isomorph zu $W$: Falls $i<j$ behandle $Z_{i+1}$ in Schritt \ref{item:algorithmus13}, sonst stopp.
+                                   $Z_i$ ist nicht isomorph zu $W$: Weiter zu Schritt \ref{item:algorithmus15}
+  \item \label{item:algorithmus15} Seien $R = \{a, b, c\}$ die roten und $B = \{x, y, z\}$ die blauen Branch-Ends des \kdd-Homöomorph.
+                                   Bildet $R$ einen $(3, 3)$-Separator, sodass alle Knoten aus $B$ in unterschiedlichen Zusammenhangskomponenten sind?
+                                   Dann erzeuge die augmentierten Komponenten mit $R$ als Separator und gehe zu Schritt \ref{item:algorithmus13}.
+                                   (Analog für $B$ als Separator)
+  \item \label{item:algorithmus16} $Z_i$ enthält nach Theorem \ref{eq:Theorem36} einen \kf-Minor: Stopp.
+\end{enumerate}
+
+%\newpage
+%\begin{minipage}{\linewidth}
+%\lstinputlisting[language=Python,
+%                 frame=single,
+%                 keywordstyle=\color{blue},
+%                 numbers=left,
+%                 caption={Algorithmus von Kezdy und McGuinness als Pseudo Code.},
+%                 captionpos=b]
+%                {algorithmen/Kezdy_McGuinness.py}
+%\end{minipage}
