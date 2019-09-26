@@ -1,3 +1,23 @@
 % kapitel5.tex
 \chapter{Implementierung}
 \label{cha:implementierung}
+
+Im Folgenden werden Details zur Implmentierung im \emph{Open Graph Drawing Framework} erklärt.
+Dazu wird zunächst das Framework vorgestellt, anschließend werden wichtige Klassen und Algorithmen behandelt und letztlich zusammengesetzt, um einen zertifierenden Algorithmus zum Finden von \kf-Minoren zu bilden.
+\ \\
+
+Das \emph{Open Graph Drawing Framework (OGDF)} ist ein in C++ geschriebenes Framework, das Algorithmen und Datenstrukturen für Graphen enthält, wobei ein besonderes Augenmerk auf dem Zeichnen von Graphen liegt.
+OGDF kann unabhängig von anderen Frameworks und Bibliotheken genutzt werden und läuft sowohl unter Linux als auch unter Windows und MacOS.
+Es wurde 2005 unter der GNU General Public License als Open Source Projekt veröffentlicht\cite{OGDFAbout}\cite{CGJK+2014}.
+
+\newpage
+\begin{minipage}{\linewidth}
+\lstinputlisting[language=C++,
+                 frame=single,
+                 keywordstyle=\color{blue},
+                 basicstyle=\footnotesize,
+                 numbers=left,
+                 caption={Implementierung des Algorithmus von Kezdy und McGuinness.},
+                 captionpos=b]
+                {algorithmen/FindK5Minor.cpp}
+\end{minipage}

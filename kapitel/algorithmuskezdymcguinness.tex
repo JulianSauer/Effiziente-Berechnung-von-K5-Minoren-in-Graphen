@@ -3,9 +3,9 @@
 \label{cha:algorithmuskezdymcguinness}
 
 Da die Arbeit auf dem sequenziellen Algorithmus von Kezdy und McGuinness, den sie in \cite{KeM92} vorstellen, beruht, wird er im Folgenden erklärt.
-Als Eingabe wird ein ungerichteter Graph ohne Mehrfachkanten erwartet, ausgegeben wird, ob ein $K_5$-Minor enthalten ist oder nicht.
+Als Eingabe wird ein ungerichteter Graph ohne Mehrfachkanten oder Schleifen erwartet, ausgegeben wird, ob ein $K_5$-Minor enthalten ist oder nicht.
 Für den Fall, dass einer gefunden wurde, kann zusätzlich ausgegeben werden, welche Knoten den Minor formen.
-Die Laufzeit liegt in $\mathcal{O}(n^2)$.
+Die Laufzeit liegt in $\mathcal{O}(n^2)$. % TODO
 
 Planaritätstests können bereits in linearer Laufzeit entscheiden, ob ein Graph einen \kf- oder \kdd-Minor enthält.
 Es muss folglich der Fall behandelt werden, in dem der Test stoppt, weil er einen \kdd-Minor gefunden hat.
@@ -22,7 +22,7 @@ Die folgenden Theoreme und ihre Beweise sind \cite{KeM92} entnommen.
 Um das zentrale Theorem aus \cite{KeM92}, welches den \kdd-Minor untersucht, zu erklären, wird zunächst die Gültigkeit augmentierter Komponenten behandelt:
 \begin{theorem}\label{eq:Theorem33}
   Für $k \geq 3$: Sei $G$ ein $k$-zusammenhängender Graph und $C$ ein $k$-Separator in $G$.
-  Alle durch $C$ definierten augmentierten Komponenten sind Minoren von $G$ \gdw es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
+  Jede durch $C$ definierte augmentierte Komponente ist ein Minor von $G$ \gdw es entweder mindestens $k$ Komponenten sind oder mindestens zwei der Komponenten jeweils aus mehr als einem Knoten bestehen.
 \end{theorem}
 \begin{beweis}
   Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ beziehungsweise $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G - C$ entstehen.
@@ -75,7 +75,7 @@ Als nächstes stellen Kezdy und McGuinness fest, dass im Fall eines \dd-Separato
 Das zentrale Theorem ist darauf zurückzuführen, dass jeder Graph ohne \kf-Minor durch Cliquen-Summen von Teilgraphen, die planar oder isomorph zu $W$ sind, gebildet werden kann.\cite{Wag37}
 Eine genauere Betrachtung findet in Kapitel \ref{cha:wagnerstruktur} statt.
 \begin{theorem}\label{eq:Theorem36}
-  Sei $G$ ein $3$-zusammenhängender Graph, der ein \kdd-Homöomorph $S$ enthält, dessen Branch-Ends in die rote Knotenmenge $R = \{a, b, c\}$ und blaue $B = \{x, y, z\}$ unterteilt sind.
+  Sei $G$ ein $3$-zusammenhängender Graph, der ein \kdd-Subdivision $S$ enthält, dessen Branch-Ends in die rote Knotenmenge $R = \{a, b, c\}$ und blaue $B = \{x, y, z\}$ unterteilt sind.
   Eine der folgenden Bedingungen trifft auf $G$ zu:
   \begin{enumerate}
     \item $G$ enthält einen \kf-Minor.\label{eq:Theorem361}
@@ -88,7 +88,7 @@ Durch die Theoreme \ref{eq:Theorem33} und \ref{eq:Theorem34} wurde gezeigt, dass
 Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird, ob $S$ einen \kf-Minor enthält - also ob Bedingung \ref{eq:Theorem361} zutrifft.
 
 \begin{lemma}\label{eq:Lemma32}
-  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Subdivision in $G$.
   Enthält $G$ drei Pfade von einem Knoten $w \in G - S$ zu drei Knoten in $S$, die nicht alle im selben Branch-Fan liegen, enthält $G$ einen \kf-Minor.
 \end{lemma}
 \begin{beweis}
@@ -132,7 +132,7 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
 \end{figure}
 
 \begin{lemma}\label{eq:Lemma33}
-  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Subdivision in $G$.
   Betrachtet wird ein Pfad außerhalb von $S$, der zwei Knoten in einem roten Branch-Fan verbindet, welche jedoch nicht beide auf dem gleichen Pfad in $S$ liegen.
   Analog dazu wird ein Pfad außerhalb von $S$ gesucht, der zwei Knoten in einem blauen Branch-Fan verbindet, ohne dass diese beide auf dem gleichen Pfad in $S$ liegen.
   Existieren diese beiden Pfade in $G$, dann enthält $G$ einen \kf-Minor.
@@ -175,14 +175,14 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
 \end{figure}
 
 \begin{lemma}\label{eq:Lemma34}
-  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$.
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Subdivision in $G$.
   Betrachtet wird ein Pfad außerhalb von $S$, der zwei innere Knoten paralleler Pfade in $S$ verbindet sowie ein Pfad außerhalb von $S$, dessen Endpunkte nicht beide im gleichen Pfad von $S$ liegen.
   Bestehen die Endpunkte der beiden Pfade aus mindestens drei unterschiedlichen Knoten in $S$, enthält $G$ einen \kf-Minor.
 \end{lemma}
 % TODO: Beweis?
 
 \begin{lemma}\label{eq:Lemma35}
-  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Homöomorph in $G$ mit den roten Knoten $R = \{a, b, c\}$ und den blauen Knoten $B = \{x, y, z\}$.
+  Sei $G$ ein $3$-zusammenhängender Graph und $S$ ein \kdd-Subdivision in $G$ mit den roten Knoten $R = \{a, b, c\}$ und den blauen Knoten $B = \{x, y, z\}$.
   Bilden weder $R$, noch $B$ einen \dd-Separator, enthält $G$ einen \kf-Minor.
 \end{lemma}
 \begin{beweis}
@@ -203,7 +203,7 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
 \end{beweis}
 
 %\begin{lemma}\label{eq:Lemma36}
-%  Sei $G$ ein $3$-zusammenhängender Graph mit einem $W$-Homöomorph.
+%  Sei $G$ ein $3$-zusammenhängender Graph mit einem $W$-Subdivision.
 %  Ist $G$ nicht isomorph zu $W$, enthält $G$ einen \kf-Minor.
 %\end{lemma}
 % Beweis?
@@ -220,7 +220,7 @@ Als nächstes folgt der Beweis zu \ref{eq:Theorem36}.
   Liegen die Endpunkte von $P_1$ beide in einem einzelnen blauen Branch-Fan und die von $P_2$ in einem einzelnen roten, dann enthält $G$ laut Lemma \ref{eq:Lemma33} einen \kf-Minor.
   Liegen die Endpunkte von $P_1$ in parallelen Pfaden von $S$, enthält $G$ laut Lemma \ref{eq:Lemma34} einen \kf-Minor, da die Endpunkte von $P_2$ nicht auf einem Pfad von $S$ liegen (analog falls $P_2$ auf parallelen Pfaden liegt).
   Übrig bleibt die Möglichkeit, dass die Endpunkte der beiden Pfade paarweise identisch sind, siehe rechts in Abbildung \ref{fig:W}.
-  Dann ist $G$ ein Homöomorph zu $W$ und enthält laut Lemma \ref{eq:Theorem36} keinen \kf-Minor bei Isomorphie zu $W$.
+  Dann ist $G$ ein Subdivision zu $W$ und enthält laut Lemma \ref{eq:Theorem36} keinen \kf-Minor bei Isomorphie zu $W$.
 \end{beweis}
 
 
@@ -233,7 +233,7 @@ Genauso müssen zwei Knoten existieren, die einen $(2, j)$-Separator bilden, fal
 In beiden Fällen kann der Separator benutzt werden, um den Graph in $j$ augmentierte Komponenten zu zerlegen.
 Anschließend kann der $3$-Zusammenhang der einzelnen Komponenten rekursiv geprüft werden.
 Sind die Komponenten alle $3$-zusammenhängend, kann auf jede ein Planaritätstest angewendet werden.
-Kezdy und McGuinness verwenden den Williamson-Algoritmus,\cite{Wil84} welcher in Linearzeit für einen Graph einen \kf- \bzw \kdd-Homöomorph ausgibt oder feststellt, dass der Graph planar ist.
+Kezdy und McGuinness verwenden den Williamson-Algoritmus,\cite{Wil84} welcher in Linearzeit für einen Graph einen \kf- \bzw \kdd-Subdivision ausgibt oder feststellt, dass der Graph planar ist.
 In der Implementierung wird stattdessen der Planaritätstest von Boyer und Myrvold\cite{BoM04} verwendet, der bereits in \OGDF existiert.
 Ergibt der Planaritätstest, dass eine Komponente planar ist, wird sie nicht weiter beachtet.
 Enthält sie einen \kf-Minor, kann der Algorithmus stoppen und diesen ausgeben.
@@ -254,12 +254,12 @@ Für alle $j$ Zusammenhangskomponenten $Z_i$ von $G$:
   \item \label{item:algorithmus13} Planaritätstest:
                                    \begin{enumerate}
                                      \item $Z_i$ ist planar: Falls $i<j$ behandle $Z_{i+1}$ in Schritt \ref{item:algorithmus13}, sonst stopp.
-                                     \item $Z_i$ enthält ein \kf-Homöomorph: Stopp
-                                     \item $Z_i$ enthält ein \kdd-Homöomorph: Weiter zu Schritt \ref{item:algorithmus14}
+                                     \item $Z_i$ enthält ein \kf-Subdivision: Stopp
+                                     \item $Z_i$ enthält ein \kdd-Subdivision: Weiter zu Schritt \ref{item:algorithmus14}
                                    \end{enumerate}
   \item \label{item:algorithmus14} $Z_i$ ist isomorph zu $W$: Falls $i<j$ behandle $Z_{i+1}$ in Schritt \ref{item:algorithmus13}, sonst stopp.
                                    $Z_i$ ist nicht isomorph zu $W$: Weiter zu Schritt \ref{item:algorithmus15}
-  \item \label{item:algorithmus15} Seien $R = \{a, b, c\}$ die roten und $B = \{x, y, z\}$ die blauen Branch-Ends des \kdd-Homöomorph.
+  \item \label{item:algorithmus15} Seien $R = \{a, b, c\}$ die roten und $B = \{x, y, z\}$ die blauen Branch-Ends des \kdd-Subdivision.
                                    Bildet $R$ einen $(3, 3)$-Separator, sodass alle Knoten aus $B$ in unterschiedlichen Zusammenhangskomponenten sind?
                                    Dann erzeuge die augmentierten Komponenten mit $R$ als Separator und gehe zu Schritt \ref{item:algorithmus13}.
                                    (Analog für $B$ als Separator)
