@@ -4,7 +4,7 @@
 
 In diesem Kapitel soll Theorem \ref{eq:Theorem36} genauer betrachtet werden.
 Zunächst werden einige Baumstrukturen eingeführt, die den $3$-Zusammenhang herstellen können.
-Anschließend werden $(3, 3)$-Separatoren behandelt und eine Formulierung von dem Theorem von Wagner, das in Theorem \ref{eq:Theorem36} benutzt wurde, vorgestellt.
+Anschließend werden \dd-Separatoren behandelt und eine Formulierung von dem Theorem von Wagner, das in Theorem \ref{eq:Theorem36} benutzt wurde, vorgestellt.
 Letztlich werden die gewonnen Erkenntnisse zu einer neuen Struktur zusammengefasst, die als Zertifikat für den Algorithmus von Kezdy und McGuinness dienen kann und dieser entsprechend angepasst.
 
 \subsection{$2$-Zusammenhang}
@@ -15,35 +15,35 @@ Letztlich werden die gewonnen Erkenntnisse zu einer neuen Struktur zusammengefas
   \label{fig:1-Block-Tree1}
 \end{wrapfigure}
 \begin{definition}
-  Als \emph{Block} eines Graphen $G$ wird jeder seiner maximalen Teilgraphen bezeichnet, der keinen $1$-Separator enthält - als $2$-zusammenhängend ist.
+  Als \emph{Block} eines Graphen $G$ wird jeder seiner maximalen Teilgraphen bezeichnet, der keinen $1$-Separator enthält -- als $2$-zusammenhängend ist.
   Je zwei Blöcke haben maximal einen gemeinsamen Knoten, der einen $1$-Separator in $G$ bildet.
   Der \emph{Block-Cut Tree} von $G$ ist ein Baum, der für jeden Block von $G$ einen Knoten besitzt und für jeden Separator eine Kante\cite{BoM08}.
 \end{definition}
-Als Beispiel wird in Abbildung \ref{fig:1-Block-Tree1} ein Graph mit dazugehörigem Block-Cut Tree in Abbildung \ref{fig:1-Block-Tree2} gezeigt.
+Als Beispiel wird in \Abb \ref{fig:1-Block-Tree1} ein Graph mit dazugehörigem Block-Cut Tree in \Abb \ref{fig:1-Block-Tree2} gezeigt.
 Die Knoten des Block-Cut Tree sind als durchgezogene Linien angegeben, in jedem dieser Knoten findet sich ein $2$-zusammenhängender Teilgraph aus $G_1$. %TODO: Laufzeit
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bilder/1-Block-Tree2.pdf}
-  \caption{Der Block-Cut Tree zu $G$ aus Abbildung \ref{fig:1-Block-Tree1}.}
+  \caption{Der Block-Cut Tree zu $G$ aus \Abb \ref{fig:1-Block-Tree1}.}
   \label{fig:1-Block-Tree2}
 \end{figure}
 
 In \cite{Li11} stellt Li eine Erweiterung zum Block-Cut Tree vor, die als \emph{$1$-Block-Tree} bezeichnet wird, da neben den Blöcken auch $1$-Separatoren enthalten sind.
 
 \begin{definition}
-  Seien für einen Graph $G$ die Knoten seines Block-Cut Trees $T_{bc} = (V_{T_{bc}}, E_{T_{bc}})$ als Blockknoten bezeichnet.
+  Seien für einen Graphen $G$ die Knoten seines Block-Cut Trees $T_{bc} = (V_{T_{bc}}, E_{T_{bc}})$ als Blockknoten bezeichnet.
   Der \emph{$1$-Block-Tree} von $G$ ist ein Baum $T_{(1)} = (V_{(1)}, E_{(1)})$.
   Dann gilt $V_{(1)} \subseteq V_{T_{bc}}$.
   Außerdem enthält $T_{(1)}$ einen zusätzlichen Knoten $c$ für jede Kante $(u, v) \in E_{T_{bc}}$, sodass $\{(u, c), (c, v)\} \subseteq E_{(1)}$ und $E_{T_{bc}} \cap E_{(1)} = \emptyset$ gilt.
   Dabei wird $c$ als Cliquenknoten bezeichnet und beinhaltet genau den $1$-Separator, den die zu $u$ und $v$ gehörenden Teilgraphen in $G$ als gemeinsamen Knoten besitzen.
 \end{definition}
 
-Ein Beispiel findet sich in Abbildung \ref{fig:1-Block-Tree3}.
+Ein Beispiel findet sich in \Abb \ref{fig:1-Block-Tree3}.
 Es kann beobachtet werden, dass die in Blockknoten enthaltenen Teilgraphen identisch zu den augmentierten Komponenten sind, die im Algorithmus von Kezdy und McGuinness in Schritt \ref{item:algorithmus11} durch $1$-Separatoren gebildet werden.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bilder/1-Block-Tree3.pdf}
-  \caption{Der $1$-Block-Tree zu $G$ aus Abbildung \ref{fig:1-Block-Tree2}.
+  \caption{Der $1$-Block-Tree zu $G$ aus \Abb \ref{fig:1-Block-Tree2}.
            Die Cliquenknoten sind ovalförmig dargestellt.}
   \label{fig:1-Block-Tree3}
 \end{figure}
@@ -63,10 +63,10 @@ Die folgende Definition dazu ist \cite{GuM00} entnommen.
 
 \begin{definition}
   Sei $G = (V, E)$ ein $2$-zusammenhängender Graph.
-  Als \emph{Split Pair} $\{u, v\}$ wird entweder ein adjazentes Knotenpaar oder ein $2$-Separator bezeichnet, ein \emph{maximales Split Pair} $\{s, t\}$ für $\{u, v\}$ teilt den Graph so auf, dass $u$, $v$, $s$, und $t$ in einer $3$-zusammenhängenden Komponente liegen.
+  Als \emph{Split Pair} $\{u, v\}$ wird entweder ein adjazentes Knotenpaar oder ein $2$-Separator bezeichnet, ein \emph{maximales Split Pair} $\{s, t\}$ für $\{u, v\}$ teilt den Graphen so auf, dass $u$, $v$, $s$, und $t$ in einer $3$-zusammenhängenden Komponente liegen.
   Eine \emph{Split Component} für ein Split Pair ist entweder eine Kante zwischen diesem oder der maximale Teilgraph, für den es kein Split Pair mehr ist.
   Ein solches Knotenpaar teilt die Kanten in die Mengen $E_1, ..., E_k$, sodass eine Menge $E_i$ alle Pfade enthält, die $u$ oder $v$ höchstens als Endpunkte haben.
-  Dabei enthält $E_i$ entweder einen Teilgraph von $G$, der nur das Knotenpaar enthält, oder einen für den das Knotenpaar kein $2$-Separator ist.
+  Dabei enthält $E_i$ entweder einen Teilgraphen von $G$, der nur das Knotenpaar enthält, oder einen für den das Knotenpaar kein $2$-Separator ist.
   \footnote {In \Abb \ref{fig:Split-Kantenmengen} ist ein $2$-zusammenhängender Graph skizziert, in dem $\{u, v\}$ eingezeichnet ist, sowie farblich hervorgehoben die dadurch entstehende Unterteilung in Kantenmengen.}
   Der SPQR-Baum $T_{SPQR}$ von $G$ ist ein Baum, der $G$ anhand jedem Split Pair $\{u, v\}$ rekursiv aufteilt und die entstehenden Minoren mit \emph{S}, \emph{P}, \emph{Q} oder \emph{R} markiert:
   \begin{itemize}
@@ -88,11 +88,11 @@ Die folgende Definition dazu ist \cite{GuM00} entnommen.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bilder/SPQR-Tree.pdf}
-  \caption{SPQR Baum zum Graph $G_2$ aus \Abb \ref{fig:2-Block-Tree1}.}
+  \caption{SPQR Baum zum Graphen $G_2$ aus \Abb \ref{fig:2-Block-Tree1}.}
   \label{fig:SPQR-Tree}
 \end{figure}
 
-Zu dem Graph in \Abb \ref{fig:2-Block-Tree1} ist in \Abb \ref{fig:SPQR-Tree} der zugehörige SPQR Baum skizziert.
+Zu dem Graphen in \Abb \ref{fig:2-Block-Tree1} ist in \Abb \ref{fig:SPQR-Tree} der zugehörige SPQR Baum skizziert.
 Besonders interessant sind die R-Knoten, die $3$-zusammenhängende Minoren von $G_2$ sind.
 Zwar gilt das auch für die drei S-Knoten, allerdings sind Kreise generell nicht $3$-zusammenhängend, aber immer planar.
 
@@ -112,27 +112,27 @@ Allerdings sind keine zwei Knoten im $2$-Block-Tree identisch.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bilder/2-Block-Tree2.pdf}
-  \caption{$2$-Block-Tree zum Graph aus \Abb \ref{fig:2-Block-Tree1}.
+  \caption{$2$-Block-Tree zum Graphen aus \Abb \ref{fig:2-Block-Tree1}.
            Die Cliquenknoten sind ovalförmig dargestellt und enthalten immer genau zwei Knoten, alle übrigen sind Blockknoten.}
   \label{fig:2-Block-Tree2}
 \end{figure}
 
 
-\subsection{$(3, 3)$-Separatoren}
+\subsection{\dd-Separatoren}
 
 \begin{definition}
-  Sei $G = (V_G, E_G)$ ein $3$-zusammenhängender, \kf-Minor freier Graph, dann ist der \emph{$(3, 3)$-Block-Tree} $T_{(3, 3)} = (V_{(3, 3)}, E_{(3, 3)})$ von $G$ wie folgt definiert.
+  Sei $G = (V_G, E_G)$ ein $3$-zusammenhängender, \kf-Minor freier Graph, dann ist der \emph{\dd-Block-Tree} $T_{(3, 3)} = (V_{(3, 3)}, E_{(3, 3)})$ von $G$ wie folgt definiert.
   Enthält $G$ keinen $(3, j)$-Separator für $j \geq 3$, so besitzt $T_{(3, 3)}$ einen einzigen Blockknoten, der $G$ komplett enthält.
   Sei andernfalls $C$ ein Graph, der die drei Knoten eines solchen $(3, j)$-Separators als Clique beinhaltet.
   Dann werden Blockknoten in $T_{(3, 3)}$ für alle $Z_i \cup C$ mit $1 \leq i \leq j$ angelegt, wobei $Z_i$ die durch den Separator entstandenen Zusammenhangskomponenten sind.
   Außerdem wird ein Cliquenknoten mit $C$ erzeugt, der im Baum Kanten zu allen zuvor erzeugten Blockknoten hat.
 \end{definition}
 
-Ein Beispiel ist in Abbildung \ref{fig:33-Block-Tree} skizziert.
+Ein Beispiel ist in \Abb \ref{fig:33-Block-Tree} skizziert.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bilder/33-Block-Tree.pdf}
-  \caption{Ein $3$-zusammenhängender Graph mit dazugehörigem $(3, 3)$-Block-Tree.
+  \caption{Ein $3$-zusammenhängender Graph mit dazugehörigem \dd-Block-Tree.
            Der Separator wird durch $\{e, f, g\}$ gebildet.
            Es ist zu sehen, dass der Eingabegraph nicht planar ist, da ein \kdd-Minor enthalten ist.
            Die Blockknoten enthalten jedoch alle planare Minoren des ursprünglichen Graphs.}
@@ -144,10 +144,10 @@ Ein Beispiel ist in Abbildung \ref{fig:33-Block-Tree} skizziert.
 \begin{definition}\label{eq:WagnerStruktur}
   Sei $G$ ein Graph ohne \kf-Minor.
   Die \emph{Wagner-Struktur} von $G$ ist ein Wald von Bäumen, sodass für jede Zusammenhangskomponente $Z$ von $G$ genau ein Baum $T_Z$ existiert.
-  Jeder $T_Z$ besteht aus einem $1$-Block-Tree $T_{(1)} = (V_{(1)}, E_{(1)})$ für $Z$, einem $2$-Block-Tree $T_{(2)} = (V_{(2)}, E_{(2)})$ für alle Graphknoten $v \in V_{(2)}$ und einem $(3, 3)$-Block-Tree $T_{(3, 3)} = (V_{(3, 3)}, E_{(3, 3)})$ für alle Graphknoten $v \in V_{(2)}$\cite{ReL}.
+  Jeder $T_Z$ besteht aus einem $1$-Block-Tree $T_{(1)} = (V_{(1)}, E_{(1)})$ für $Z$, einem $2$-Block-Tree $T_{(2)} = (V_{(2)}, E_{(2)})$ für alle Graphknoten $v \in V_{(2)}$ und einem \dd-Block-Tree $T_{(3, 3)} = (V_{(3, 3)}, E_{(3, 3)})$ für alle Graphknoten $v \in V_{(2)}$\cite{ReL}.
 \end{definition}
 
-Die Wagner-Struktur von $G$ stellt eine Dekomposition dar, sodass alle Cliquenknoten $1$, $2$ und $(3, 3)$-Separatoren von $G$ enthalten und die Graphknoten aller $(3, 3)$-Block-Trees entweder planar oder isomorph zu $W$ sind.
+Die Wagner-Struktur von $G$ stellt eine Dekomposition dar, sodass alle Cliquenknoten $1$, $2$ und \dd-Separatoren von $G$ enthalten und die Graphknoten aller \dd-Block-Trees entweder planar oder isomorph zu $W$ sind.
 Trifft das auf einen Graphknoten nicht zu, dann enthält $G$ einen \kf-Minor und die Wagner-Struktur ist ungültig.
 Das Theorem von Wagner kann daraufhin wie folgt formuliert werden:
 
@@ -155,16 +155,16 @@ Das Theorem von Wagner kann daraufhin wie folgt formuliert werden:
   Ein Graph enthält genau dann keinen \kf-Minor, wenn für ihn eine Wagner-Struktur existiert\cite{Wag37}.
 \end{theorem}
 
-Als Beispiel ist dazu in Abbildung \ref{fig:WagnerStruktur1} ein Graph $G$ zu sehen, der nicht planar ist, aber keinen \kf-Minor enthält.
+Als Beispiel ist dazu in \Abb \ref{fig:WagnerStruktur1} ein Graph $G$ zu sehen, der nicht planar ist, aber keinen \kf-Minor enthält.
 In \Abb \ref{fig:WagnerStruktur2} sind die $3$-zusammenhängende Graphen $G_1$, $G_2$, $G_3$, $G_4$, $G_5$ und $G_6$ abgebildet, von denen ebenfalls keiner einen \kf-Minor enthält.
 Außerdem ist $G_6$ nicht planar.
-Einige Cliquen sind in beiden Abbildungen mit je einer Farbe hervorgehoben, sodass durch das Zusammenfügen gleichfarbiger Knoten ein Graph $G'$ erzeugt werden kann, der $G$ als Teilgraph enthält.
+Einige Cliquen sind in beiden Abbildungen mit je einer Farbe hervorgehoben, sodass durch das Zusammenfügen gleichfarbiger Knoten ein Graph $G'$ erzeugt werden kann, der $G$ als Teilgraphen enthält.
 In \Abb \ref{fig:WagnerStruktur3} ist die Wagner-Struktur zu $G$ skizziert.
 Der $1$-Block-Tree wurde nicht eingezeichnet, da er aufgrund des $2$-Zusammenhangs von $G$ aus nur einem Graphknoten besteht.
 Foglich existiert ein einzelner $2$-Block-Tree, der aus blauen Knoten und Kanten besteht.
-Für jeden seiner Graphknoten existiert ein $(3, 3)$-Block-Tree (rot).
+Für jeden seiner Graphknoten existiert ein \dd-Block-Tree (rot).
 Es kann beobachtet werden, dass die Cliquenknoten aller Block-Trees genau die farblich markierten Cliquen aus \Abb \ref{fig:WagnerStruktur2} enthalten und in $G$ Separatoren bilden.
-Außerdem ist zu sehen, dass die Graphknoten aller $(3, 3)$-Block-Trees entweder planar oder isomorph zu $W$ sind.
+Außerdem ist zu sehen, dass die Graphknoten aller \dd-Block-Trees entweder planar oder isomorph zu $W$ sind.
 Daraus folgt, dass $G$ keinen \kf-Minor enthält.
 
 \begin{figure}[H]
@@ -185,8 +185,8 @@ Daraus folgt, dass $G$ keinen \kf-Minor enthält.
   \centering
   \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bilder/WagnerTheorem3.pdf}
   \caption{Wagner-Struktur von $G$ aus \Abb \ref{fig:WagnerStruktur1}.
-           Da $G$ bereits $2$-zusammenhängend ist, enthält der $1$-Block-Tree einen einzelnen Graphknoten für den kompletten Graph und wurde nicht eingezeichnet.
-           Die Knoten und Kanten des $2$-Block-Trees sind blau, die der $(3, 3)$-Block-Trees rot hervorgehoben.}
+           Da $G$ bereits $2$-zusammenhängend ist, enthält der $1$-Block-Tree einen einzelnen Graphknoten für den kompletten Graphen und wurde nicht eingezeichnet.
+           Die Knoten und Kanten des $2$-Block-Trees sind blau, die der \dd-Block-Trees rot hervorgehoben.}
   \label{fig:WagnerStruktur3}
 \end{figure}
 
@@ -198,10 +198,10 @@ Anschließend werden augmentierte Komponenten für $1$- und $2$-Separatoren durc
 \begin{beobachtung}
   Wird der Graph in augmentierte Komponenten aufgeteilt, sind diese isomorph zu mindestens einem Blockknoten der verschiedenen Block-Trees, wenn bis dahin alle Separatoren gleich gewählt wurden.
 \end{beobachtung}
-Im Algorithmus von Kezdy und McGuinness wird der Graph in augmentierte Komponenten aufgeteilt, wenn ein $(1, 2)$-, $(2, 2)$- oder $(3, 3)$-Separator gefunden wird.
-Sei $C$ ein solcher $(i, j)$-Separator, der einen zusammenhängenden Graph $G$ in genau $j$ Zusammenhangskomponenten $Z_1, ..., Z_j$ aufteilt, wenn die $i$ Knoten von $C$ aus $G$ entfernt werden.
+Im Algorithmus von Kezdy und McGuinness wird der Graph in augmentierte Komponenten aufgeteilt, wenn ein $(1, 2)$-, $(2, 2)$- oder \dd-Separator gefunden wird.
+Sei $C$ ein solcher $(i, j)$-Separator, der einen zusammenhängenden Graphen $G$ in genau $j$ Zusammenhangskomponenten $Z_1, ..., Z_j$ aufteilt, wenn die $i$ Knoten von $C$ aus $G$ entfernt werden.
 
-Angenommen, es gäbe eine augmentierte Komponenten $G_a$, zu der es im zugehörigen $(3, 3)$-Block-Tree keinen Blockknoten $t$ mit assoziiertem Graph $G_t$ gibt, sodass $G_a$ und $G_t$ isomorph sind.
+Angenommen, es gäbe eine augmentierte Komponenten $G_a$, zu der es im zugehörigen \dd-Block-Tree keinen Blockknoten $t$ mit assoziiertem Graphen $G_t$ gibt, sodass $G_a$ und $G_t$ isomorph sind.
 Dann gibt es einen Separator $C_a$ in $G$, aus dem $G_a$ entstanden ist.
 Da es kein $t$ mit einem zu $G_a$ isomorphen $G_t$ gibt, wurden keine Knoten im Block-Tree mit $C_a$ erzeugt, sodass es ebenfalls keinen Cliquenknoten mit $C_a$ gibt.
 Dann wurde mindestens ein Separator $C_a'$ für den $1$-Block-Tree gewählt, wodurch die Knoten von $C_a$ so in Blockknoten enthalten sind, dass sie dort keinen Separator bilden, was der gleichen Wahl von Separatoren widerspricht.
@@ -218,31 +218,31 @@ Analog müssen für einen $2$-Block-Tree Knotenpaare des SPQR-Baumes, die aus zw
 Neben den Knotenpaaren, die adjazent zueinander sind, müssen Cliquenknoten zusätzlich für solche gebildet werden, die durch einen Pfad miteinander verbunden sind, der ausschließlich aus S-, P- oder Q-Knoten besteht.
 Um in der Praxis Laufzeit zu sparen, kann dieser Schritt auf den Fall verschoben werden, dass ein \kf-Minor gefunden wurde und die zugehörigen Pfade im Eingabegraph geprüft werden sollen.
 
-Um die Blockknoten des $2$-Block-Trees in je einen $(3, 3)$-Block-Tree zu verwandeln, müssen nicht nur entsprechende Separatoren gefunden und augmentierte Komponente gebildet, sondern auch garantiert werden, dass die Blockknoten der $(3, 3)$-Block-Trees entweder planar oder isomorph zu $W$ sind und in keinem ein \kf-Minor enthalten ist.
+Um die Blockknoten des $2$-Block-Trees in je einen \dd-Block-Tree zu verwandeln, müssen nicht nur entsprechende Separatoren gefunden und augmentierte Komponente gebildet, sondern auch garantiert werden, dass die Blockknoten der \dd-Block-Trees entweder planar oder isomorph zu $W$ sind und in keinem ein \kf-Minor enthalten ist.
 Hier kann das Theorem \ref{eq:Theorem36} in Kombination mit dem zuvor angewendeten Planaritätstest genutzt werden, um die Struktur aufzubauen.
 Sei dazu $G_t$ der Graph, der zu einem beliebigen Blockknoten $t$ im $2$-Block-Tree gehört.
 $G_t$ muss $3$-zusammenhängend sein, da er als Graph vollständig in $t$ vorkommt.
 Im Algorithmus von Kezdy und McGuinness wird $G_t$ nun im dritten Schritt durch einen Planaritätstest überprüft.
 Wird ein \kf-Minor gefunden, ist die Wagner-Struktur ungültig und der Algorithmus terminiert.
-Andernfalls kann $G_t$ planar sein - dann wird im $(3, 3)$-Block-Tree ein einzelner Blockknoten angelegt, der $G_t$ enthält und als planar markiert ist.
+Andernfalls kann $G_t$ planar sein -- dann wird im \dd-Block-Tree ein einzelner Blockknoten angelegt, der $G_t$ enthält und als planar markiert ist.
 Letztlich kann der Planaritätstest ein \kdd-Subdivision $S$ finden, sodass die Voraussetzungen für Theorem \ref{eq:Theorem36} gegeben sind.
-Im ersten Fall von Theorem \ref{eq:Theorem36} enthält $G_t$ jedoch einen \kf-Minor, da keine Knoten von $S$ einen $(3, 3)$-Separator bilden - der Beweis dazu findet sich in Lemma \ref{eq:Lemma35}.
+Im ersten Fall von Theorem \ref{eq:Theorem36} enthält $G_t$ jedoch einen \kf-Minor, da keine Knoten von $S$ einen \dd-Separator bilden -- der Beweis dazu findet sich in Lemma \ref{eq:Lemma35}.
 Damit wäre die Wagner-Struktur erneut ungültig.
 Im zweiten Fall ist $G_t$ isomorph zu $W$.
-Analog zum planaren Fall wird ein neuer Blockknoten im $(3, 3)$-Block-Tree angelegt, der $G_t$ enthält und entsprechend gekennzeichnet ist.
-Der dritte und vierte Fall treten ein, falls drei Knoten aus $S$ einen $(3, 3)$-Separator bilden.
-Kezdy und McGuinness erzeugen hier augmentierte Komponenten, die als Blockknoten des $(3, 3)$-Block-Trees genutzt werden können.
+Analog zum planaren Fall wird ein neuer Blockknoten im \dd-Block-Tree angelegt, der $G_t$ enthält und entsprechend gekennzeichnet ist.
+Der dritte und vierte Fall treten ein, falls drei Knoten aus $S$ einen \dd-Separator bilden.
+Kezdy und McGuinness erzeugen hier augmentierte Komponenten, die als Blockknoten des \dd-Block-Trees genutzt werden können.
 Zusätzlich müssen die drei Knoten des Separators als neuer Cliquenknoten eingefügt und mit den entstandenen Blockknoten verbunden werden.
 Der Algorithmus wird rekursiv auf jeden der Blockknoten angewendet, bis alle zugehörigen Teilgraphen planar oder isomorph zu $W$ sind \bzw ein \kf-Minor gefunden wurde.
-Somit ist das Ergebnis des modifierten Algorithmus entweder eine Wagner-Struktur, die aus einem Wald von $1$-Block-Trees mit Blockknoten, die aus $2$-Block-Trees mit Blockknoten aus $(3, 3)$-Block-Trees bestehen und die die planaren Minoren und Kopien von $W$ im Eingabegraph zeigen.
+Somit ist das Ergebnis des modifierten Algorithmus entweder eine Wagner-Struktur, die aus einem Wald von $1$-Block-Trees mit Blockknoten, die aus $2$-Block-Trees mit Blockknoten aus \dd-Block-Trees bestehen und die die planaren Minoren und Kopien von $W$ im Eingabegraph zeigen.
 Oder es wird ein \kf-Minor als Teilgraph des Eingabegraphen gefunden, sodass die Wagner-Struktur ungültig ist, die Frage, ob ein \kf-Minor enthalten ist, jedoch in beiden Fällen eindeutig beantwortet werden kann.
 
 \subsection{Zertifierender Algorithmus}
 Das Ziel ist, einen \kf-Minor zu finden oder ein Zertifikat zu liefern, dass keiner enthalten ist.
-Dafür sind besonders folgende Strukturen in einem Graph relevant: Planare Teilgraphen, $W$-Subdivisions, \kf-Minoren und $(3, 3)$-Separtoren - andere Separatoren werden lediglich benötigt, um den $3$-Zusammenhang zu garantieren.
+Dafür sind besonders folgende Strukturen in einem Graphen relevant: Planare Teilgraphen, $W$-Subdivisions, \kf-Minoren und \dd-Separtoren -- andere Separatoren werden lediglich benötigt, um den $3$-Zusammenhang zu garantieren.
 Beispielsweise sind zwei planare Teilgraphen, die durch einen $2$-Separator verbunden sind, ebenfalls planar.
-Das Zertifikat für einen Graph $G$ besteht also entweder aus einem gefundenen \kf-Minor in Form von fünf disjunkten Knotenmengen, die jeweils einen der fünf Knoten des \kf formen - dann ist zu prüfen, ob dadurch im ursprünglichen Graph ebenfalls einer geformt wird.
-Einerseits muss dazu jede Knotenmenge einen zusammenhängenden Teilgraph in $G$ formen.
+Das Zertifikat für einen Graphen $G$ besteht also entweder aus einem gefundenen \kf-Minor in Form von fünf disjunkten Knotenmengen, die jeweils einen der fünf Knoten des \kf formen -- dann ist zu prüfen, ob dadurch im ursprünglichen Graph ebenfalls einer geformt wird.
+Einerseits muss dazu jede Knotenmenge einen zusammenhängenden Teilgraphen in $G$ formen.
 Andererseits sind genau diese fünf Teilgraphen paarweise durch Pfade in $G$ verbunden, die beispielsweise durch eine Tiefensuche gefunden werden können.
 Oder es wird eine Wagner-Struktur erzeugt, es kann jeder Knoten der Struktur wie folgt geprüft werden:
 \begin{enumerate}
@@ -250,9 +250,9 @@ Oder es wird eine Wagner-Struktur erzeugt, es kann jeder Knoten der Struktur wie
         Dann ist $G'$ ebenfalls planar, was \zB durch einen Planaritätstest geprüft werden kann.
   \item \textbf{$W$}: Analog zum Test eines \kf-Minor können acht Knotenmengen die $W$-Subdivision darstellen.
         Der für den Algorithmus von Kezdy und McGuinness implementierte Isomorphietest kann wiederverwendet werden. % TODO: Isomorphietest in Implementierung beschreiben
-  \item \textbf{$(3, 3)$-Separator}: Jeder gefundene Separator bildet auch im ursprünglichen Graph einen Separator.
+  \item \textbf{\dd-Separator}: Jeder gefundene Separator bildet auch im ursprünglichen Graphen einen Separator.
         Sei $a$ die Anzahl der Zusammenhangskomponenten von $G$.
-        Dann kann der $(3, 3)$-Separator aus $G$ entfernt werden.
+        Dann kann der \dd-Separator aus $G$ entfernt werden.
         Sei $b$ die neue Anzahl der Zusammenhangskomponenten.
         Dann muss $b - a \geq 2$ gelten.
 \end{enumerate}

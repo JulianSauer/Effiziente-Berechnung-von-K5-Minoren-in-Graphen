@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+\node [circle, minimum height=0.6cm, fill=red!50!white, draw] (v9) at (5,-0.5) {$w_1$};
+\node [circle, minimum height=0.6cm, fill=red!50!white, draw] (v13) at (5,-2.5) {$w_2$};
+\node [circle, minimum height=0.6cm, fill=red!50!white, draw] (v15) at (5,-4.5) {$w_3$};
+\node [circle, minimum height=0.6cm, fill=blue!60!white, draw] (v10) at (8.5,-0.5) {$w_4$};
+\node [circle, minimum height=0.6cm, fill=blue!60!white, draw] (v11) at (8.5,-2.5) {$w_5$};
+\node [circle, minimum height=0.6cm, fill=blue!60!white, draw] (v12) at (8.5,-4.5) {$w_6$};
+\node [circle, minimum height=0.6cm, draw] (v14) at (7.5,-2.5) {$w_7$};
+\node [circle, minimum height=0.6cm, draw] (v16) at (7.5,-4.5) {$w_8$};
+\draw  (v9) edge (v10);
+\draw  (v9) edge (v11);
+\draw  (v9) edge (v12);
+\draw  (v13) edge (v10);
+\draw  (v13) edge (v14);
+\draw  (v14) edge (v11);
+\draw  (v13) edge (v12);
+\draw  (v15) edge (v10);
+\draw  (v15) edge (v11);
+\draw  (v15) edge (v16);
+\draw  (v16) edge (v12);
+\draw  (v14) edge (v16);
+\end{tikzpicture}
