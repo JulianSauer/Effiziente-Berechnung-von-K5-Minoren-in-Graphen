@@ -3,7 +3,7 @@
 \label{cha:implementierung}
 
 Im Folgenden werden Details zur Implmentierung im \emph{Open Graph Drawing Framework} erklärt.
-Dazu wird zunächst das Framework vorgestellt, anschließend wird erklärt, wie der Algorithmus von Kezdy und McGuinness zusammen mit einer Wagner-Struktur umgesetzt werden kann, um ein Zertifikat zu liefern.
+Dazu wird zunächst kurz das Framework vorgestellt, anschließend wird erklärt, wie der Algorithmus von Kezdy und McGuinness zusammen mit einer Wagner-Struktur umgesetzt werden kann, um ein Zertifikat zu liefern und welche Schwierigkeiten durch Separatoren auftreten.
 \ \\
 
 Das \emph{Open Graph Drawing Framework (OGDF)} ist ein in C++ geschriebenes Framework, das Algorithmen und Datenstrukturen für Graphen enthält, wobei ein besonderes Augenmerk auf dem Zeichnen von Graphen liegt.
@@ -12,27 +12,27 @@ Es wurde 2005 unter der GNU General Public License als Open Source Projekt verö
 
 \section{Algorithmus von Kezdy und McGuinness als Wagner-Struktur}
 Im Folgenden wird die Wagner-Struktur mit dem Algorithmus von Kezdy und McGuinness verglichen und dieser so modifiziert, dass er sie erzeugen kann.
-Allerdings werden augmentierte Komponenten für $1$- und $2$-Separatoren durch Block-Cut Trees und SPQR-Bäume erzeugt sowie ein zertifizierender Algorithmus beschrieben.
+Daraufhin werden augmentierte Komponenten für $1$- und $2$-Separatoren durch Block-Cut-Trees und SPQR-Bäume erzeugt und abschließend ein Zertifikat erklärt.
 
 \subsection{Block-Trees}
 Im Algorithmus von Kezdy und McGuinness wird der Graph in augmentierte Komponenten aufgeteilt, wenn ein $(1, 2)$-, $(2, 2)$- oder \dd-Separator gefunden wird.
 Er wird so lange ausgeführt, bis die Blockknoten aller \dd-Block-Trees der Wagner-Struktur planar \bzw isomorph zu $W$ sind oder ein \kf-Minor gefunden wurde.
-Um eine Wagner-Struktur aufzubauen, wird zunächst für jede Zusammenhangskomponente $G$ des Eingabegraphen ein $1$-Block-Tree angelegt, der einen einzelnen auf $G$ verweisenden Blockknoten $v_B$ enthält.
+Um eine Wagner-Struktur aufzubauen, wird zunächst für jede Zusammenhangskomponente $G$ des Eingabegraphen ein $1$-Block-Tree angelegt, der einen einzelnen auf $G$ verweisenden Blockknoten $v_b$ enthält.
 Eine Funktion, um einen $1$-Separator $C$ in $G$ zu finden, existiert bereits in OGDF.
 Sind alle Graphen der Blockknoten $2$-zusammenhängend, kann mit dem nächsten Schritt fortgefahren werden.
-Andernfalls werden die augmentierten Komponenten $A_1, ..., A_j$ gebildet, die durch den gefundenen $1$-Separator $C$ in $G$, auf den der Blockknoten $v_B$ verweist, definiert werden.
-Dann wird $v_B$ durch einen Cliquenknoten $v_C$ für $C$ sowie einem Blockknoten $v_{b_{A_i}}$ für jede augmentierte Komponente ersetzt.
-Anschließend werden Kanten der Form $(v_C, v_{b_{A_i}})$ hinzugefügt, um jede neue augmentierte Komponente mit dem neuen Cliquenknoten zu verbinden.
-War $v_B$ adjazent zu einem anderen Cliquenknoten $v_C'$, der auf einen Teilgraph $G_C$ verweist, dann gibt es jetzt genau eine augmentierte $v_{b_{A_i}}$, die den Teilgraph $G_C$ enthält.
-Die Kante $(v_C', v_{b_{A_i}})$ wird hinzugefügt.
+Andernfalls werden die augmentierten Komponenten $A_1, ..., A_j$ gebildet, die durch den gefundenen $1$-Separator $C$ in $G$, auf den der Blockknoten $v_b$ verweist, definiert werden.
+Dann wird $v_b$ durch einen Cliquenknoten $v_c$ für $C$ sowie einem Blockknoten $v_{b_{A_i}}$ für jede augmentierte Komponente ersetzt.
+Anschließend werden Kanten der Form $(v_c, v_{b_{A_i}})$ hinzugefügt, um jede neue augmentierte Komponente mit dem neuen Cliquenknoten zu verbinden.
+War $v_b$ adjazent zu einem anderen Cliquenknoten $v_c'$, der auf einen Teilgraph $G_C$ verweist, dann gibt es jetzt genau eine augmentierte $v_{b_{A_i}}$, die den Teilgraph $G_C$ enthält.
+Die Kante $(v_c', v_{b_{A_i}})$ wird hinzugefügt.
 Letztlich kann dieser Schritt auf alle neu entstandenen augmentierten Komponenten rekursiv angewendet werden, bis keine $1$-Separatoren mehr gefunden werden.
 
 Das gleiche Verfahren kann genutzt werden, um $2$-Block-Trees für alle Blockknoten des $1$-Block-Trees zu erzeugen -- eine Suche nach $2$-Separatoren ist ebenfalls bereits implementiert.
 Wird ein Cliquenknoten im $2$-Block-Tree angelegt, muss \ggf eine zusätzliche Kante im assoziierten Graph eingefügt werden, damit die beiden Separatorknoten eine Clique formen.
 Da die Blockknoten die augmentierten Komponenten enthalten, ist die Kante dort immer vorhanden.
 
-Als nächstes wird ein \dd-Block-Tree $T$ für jeden Blockknoten $v_B$ der $2$-Block-Trees aufgebaut.
-Zunächst wird ein neuer Blockknoten in $T$ angelegt, der auf den mit $v_B$ assozierten Graph $G$ verweist.
+Als nächstes wird ein \dd-Block-Tree $T$ für jeden Blockknoten $v_b$ der $2$-Block-Trees aufgebaut.
+Zunächst wird ein neuer Blockknoten in $T$ angelegt, der auf den mit $v_b$ assozierten Graph $G$ verweist.
 Der bereits implementierte Planaritätstest von Boyer und Myrvold \cite{BoM04} kann auf $G$ angewendet werden.
 Wird dadurch ein \kf-Minor gefunden, kann der Algorithmus stoppen -- die Wagner-Struktur ist ungültig und der Eingabegraph enthält einen \kf-Minor.
 Wird in $G$ ein \kdd-Minor gefunden, wird geprüft, ob $G$ isomorph zu $W$ ist.
@@ -46,10 +46,10 @@ Bildet der \kdd-Minor dagegen keinen \dd-Separator, dann kann nach den Lemmata a
 Findet der Planaritätstest in keinem Graphen der Blockknoten von $T$ weitere \kf- oder \kdd-Minoren, dann ist $T$ ein gültiger \dd-Block-Tree, der aus planaren Blöcken besteht.
 Wurden alle \dd-Block-Trees aufgebaut, sodass die Wagner-Struktur gültig ist, dann ist der Eingabegraph \kf-Minor-frei.
 
-\subsection{Block-Cut Trees und SPQR-Bäume}
-Wie in Kapitel \ref{cha:wagnerstruktur} angedeutet, werden statt $1$-Block-Trees Block-Cut Trees und statt $2$-Block-Trees SPQR-Bäume verwendet werden.
+\subsection{Block-Cut-Trees und SPQR-Bäume}
+Wie in Kapitel \ref{cha:wagnerstruktur} angedeutet, werden statt $1$-Block-Trees Block-Cut-Trees und statt $2$-Block-Trees SPQR-Bäume verwendet werden.
 Für beide gibt es bereits Implementierungen in OGDF, die in Linearzeit laufen.
-Der Nachteil ist, dass wenn ein $1$-Block-Tree durch einen Block-Cut Tree aufgebaut wird, jedes adjazente Knotenpaar des Block-Cut Trees nach dem gemeinsamen Knoten durchsucht werden muss, der den $1$-Separator bildet.
+Der Nachteil ist, dass wenn ein $1$-Block-Tree durch einen Block-Cut-Tree aufgebaut wird, jedes adjazente Knotenpaar des Block-Cut-Trees nach dem gemeinsamen Knoten durchsucht werden muss, der den $1$-Separator bildet.
 Vor allem für einen $2$-Block-Tree gestaltet sich die Suche nach $2$-Separatoren als schwierig, da die Graphen der Blockknoten des $2$-Block-Trees nicht identisch zu den Komponenten der R-Knoten des SPQR-Baumes sind.
 Ohne weitere Anpassungen scheint es nicht möglich, die $2$-Separatoren aus dem SPQR-Baum direkt zu gewinnen.
 Stattdessen kann auf die $3$-Zusammenhangssuche in OGDF zurückgegriffen werden, um $2$-Separatoren zu finden.
@@ -64,7 +64,7 @@ Nachdem im vorherigen Abschnitt erklärt wurde, wie der Algorithmus entscheidet,
 
 \subsection{Virtuelle Kanten}
 Werden für einen $2$- oder \dd-Separator $C$ in $G$ augmentierte Komponenten erzeugt, enthält jede Komponente die Knoten von $C$ als Clique.
-Für den Fall, dass die Knoten in $G$ keine Clique formen, wurden also Kanten hinzugefügt, die als \emph{virtuell} bezeichnet werden.
+Für den Fall, dass die Knoten in $G$ keine Clique formen, wurden Kanten hinzugefügt, die als \emph{virtuell} bezeichnet werden.
 Neben der Beantwortung der Frage, ob ein \kf-Minor enthalten ist, ist es für einige Anwendungsfälle wie das Ausgeben eines Zertifikates interessant, diesen in $G$ zu finden:
 Das \emph{Modell} eines \kf-Minoren in $G$ besteht aus fünf Teilgraphen, die in $G$ zusammenhängend und paarweise durch mindestens einen Pfad verbunden sind.
 Dafür ist es nicht nur wichtig, virtuelle Kanten zu markieren, sondern auch zu wissen, aus welchen Pfaden sie in $G$ bestehen.
@@ -98,7 +98,7 @@ Durch Rekursion können die Schritte solange angewendet werden, bis $P(c_1, c_2)
 Ist $G$ der Eingabegraph, dann besteht das Zertifikat grundsätzlich aus Teilgraphen von $G$.
 Einfachheitshalber wird angenommen, dass keine virtuellen Kanten enthalten sind.
 Ist der Graph $G$ \kf-Minor-frei, dann kann die aufgebaute Wagner-Struktur als Zertifikat dienen, um die Aussage nach dem Theorem von Wagner \cite{Wag37} zu belegen.
-Sei $G_T = (V_T, E_T)$ der Graph, der mit dem Block- oder Cliquenknoten eines Block-Cut Trees assoziiert wird und $G = V_G, E_T$ der Graph, der als Eingabe benutzt wurde.
+Sei $G_T = (V_T, E_T)$ der Graph, der mit dem Block- oder Cliquenknoten eines Block-Cut-Trees assoziiert wird und $G = V_G, E_T$ der Graph, der als Eingabe benutzt wurde.
 Es werden die Blockknoten aller \dd-Block-Trees sowie die Cliquenknoten aller Block-Trees der Wagner-Struktur wie folgt geprüft:
 \begin{enumerate}
   \item \textbf{Planarer Blockknoten}: Sei $G'$ für $G$ folgender Teilgraph: $G' = G(V_G[V_T])$

@@ -2,26 +2,27 @@
 \chapter{Einleitung}
 \label{cha:einleitung}
 
-In dieser Masterarbeit wird ein Algorithmus erklärt und implementiert, der entscheiden kann, ob ein Graph \kf-Minor-frei ist.
+Im Rahmen dieser Masterarbeit wird ein Algorithmus erklärt und implementiert, der entscheiden kann, ob ein Graph \kf-Minor-frei ist.
 Er basiert auf einem von Kezdy und McGuinness \cite{KeM92} vorgestellten Algorithmus, der quadratische Laufzeitkomplexität besitzt.
 
 \section{Motivation und Hintergrund}
 \label{sec:motivation_und_hintergrund}
-Zunächst kann durch die Berechnung von \kf-Minoren entschieden werden, ob ein Graph \kf-Minor frei ist.
-Das ist insofern interessant, als das einige Algorithmen effizienter auf solchen Graphen ausgeführt werden können.
+Durch die Berechnung von \kf-Minoren kann entschieden werden, ob ein Graph \kf-Minor-frei ist.
+Das ist insofern interessant, als dass einige Algorithmen effizienter auf \kf-Minor-freien Graphen ausgeführt werden können.
 So ist die Berechnung eines \emph{maximalen Schnittes} (\emph{Max-Cut Problem}) - also das Aufteilen der Knoten eines Graphen in zwei Mengen, sodass die Kanten zwischen diesen beiden Mengen in Summe ein maximales Gewicht besitzen - NP-schwer\cite{Kar72}.
 Allerdings wird etwa in \cite{Bar83} gezeigt, dass es für Graphen ohne \kf-Minor in Polynomialzeit gelöst werden kann.
-Darüber hinaus können viele kombinatorische Optimierungsprobleme wie quadratische 0-1 Probleme als Max-Cut Probleme formuliert werden\cite{BJR89}.
+Viele kombinatorische Optimierungsprobleme wie quadratische 0-1 Probleme können als Max-Cut Probleme formuliert werden\cite{BJR89}, sodass \kf-Minor-freie Probleminstanzen deutlich effizienter gelöst werden können.
+
 In \cite{JLMR+19} transformieren Jünger et al.\nolinebreak[4]\@\xspace Ising Spin Glass Probleme zu Max-Cut Problemen, um mit Hilfe von einem Branch-and-Cut Algorithmus eine optimale Lösung zu finden.
-Neben diesem Ansatz können Ising Spin Glass Probleme ebenfalls auf Quantencomputern wie dem D-Wave 2000Q heuristisch, aber dafür schneller gelöst werden.
-Zur Bewertung ihrer Qualität können sie mit denen von Jünger et al.\nolinebreak[4]\@\xspace verglichen werden.
-Innerhalb von diesem exakten Verfahren stellen die \kf-Minoren die Schwierigkeit des Problems dar.
-Von daher ist es einerseits interessant für die Berechnung, wenn kein \kf-Minor enthalten ist, sodass das Problem effizient gelöst werden kann.
+Diese kann mit den heuristischen Lösungen, die etwa auf dem Quantencomputer \emph{D-Wave 2000Q} berechnet werden, verglichen werden.
+Dadurch kann beispielsweise bewertet werden, ob für die schnellere Laufzeit des Quantencomputers die heuristische Lösung tragbar ist.
+Innerhalb des exakten Verfahrens stellen die \kf-Minoren die Schwierigkeit des Problems dar.
+Deshalb kann das Problem einerseits für \kf-Minor-freie Graphen effizient gelöst werden.
 Andererseits können einer oder mehrere gefundene \kf-Minoren benutzt werden, um innerhalb des linearen Programms den Suchraum zu beschränken und die Berechnung zu beschleunigen.
 
 \section{Aufbau der Arbeit}
 \label{sec:aufbau}
-Zunächst werden einige Definition gegeben, die anschließend benutzt werden, um den Algorithmus von Kezdy und McGuinness vorzustellen.
+Zunächst werden einige Definition gegeben, die anschließend benutzt werden, um den Algorithmus von Kezdy und McGuinness \cite{KeM92} vorzustellen.
 Anschließend wird ein auf Wagner \cite{Wag37} zurückzuführendes Strukturtheorem der beiden Autoren genauer betrachtet.
 Für den Fall, dass ein Graph \kf-Minor-frei ist, kann dadurch ein Zertifikat erzeugt werden, über dass die getroffene Aussage verifiziert werden kann.
 Letztlich beschäftigt sich die Arbeit mit der Implementierung des Algorithmus im \emph{Open Graph Drawing Framework} sowie einer experimentellen Analyse dieser Implementierung.

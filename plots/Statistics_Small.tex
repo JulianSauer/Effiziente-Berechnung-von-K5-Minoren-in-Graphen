@@ -16,7 +16,8 @@
   use comma,
   1000 sep={},
   no markers,
-  yticklabel={\pgfmathparse{\tick*100}\pgfmathprintnumber{\pgfmathresult}\%},]
+  yticklabel={\pgfmathparse{\tick*100}\pgfmathprintnumber{\pgfmathresult}\%},
+  legend pos=outer north east]
 \addplot [red!50!black] table [y=AverageSeparators, x=Nodes]{triconnected_small.dat};
 \addlegendentry {$(3, 3)$-Separator}
 %\addplot [red!50!black] table [y=AverageK5s, x=Nodes]{triconnected_small.dat};

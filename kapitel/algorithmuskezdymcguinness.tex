@@ -2,15 +2,15 @@
 \chapter{Algorithmus von Kezdy und McGuinness}
 \label{cha:algorithmuskezdymcguinness}
 
-Die Arbeit auf dem in \cite{KeM92} vorgestellten sequenziellen Algorithmus von Kezdy und McGuinness, der im Folgenden erklärt wird.
-Als Eingabe wird ein ungerichteter Graph ohne Mehrfachkanten oder Schleifen erwartet, ausgegeben wird, ob der Graph einen $K_5$-Minor hat.
+Die Arbeit basiert auf dem in \cite{KeM92} vorgestellten sequenziellen Algorithmus von Kezdy und McGuinness, der im Folgenden erklärt wird.
+Als Eingabe wird ein ungerichteter Graph ohne Mehrfachkanten und Schleifen erwartet, ausgegeben wird, ob der Graph einen $K_5$-Minor hat.
 Für den Fall, dass einer gefunden wurde, kann zusätzlich ausgegeben werden, welche Knoten den Minor formen.
 Die Laufzeit liegt in $\mathcal{O}(n^2)$.
 
 Planaritätstests können bereits in linearer Laufzeit entscheiden, ob ein Graph einen \kf- oder \kdd-Minor enthält\cite{BoM04}.
 Es muss folglich der Fall behandelt werden, in dem der Test stoppt, weil er einen \kdd-Minor gefunden hat.
 Denn dann kann zunächst keine Aussage darüber getroffen werden, ob zusätzlich ein \kf-Minor enthalten ist.
-Als Lösung bildet der Algorithmus von Kezdy und McGuinness in einem $3$-zusammenhängenden Graphen solange augmentierte Komponenten mit \dd-Separatoren, die Teil von \kdd-Minoren sein können, bis entweder alle Komponenten planar \bzw isomorph zu $W$ sind oder aber ein \kf-Minor gefunden wurde.
+Als Lösung bildet der Algorithmus von Kezdy und McGuinness in einem $3$-zusammenhängenden Graphen solange augmentierte Komponenten mit \dd-Separatoren, die eine Teilmenge der gefundenen \kdd-Minoren sind, bis entweder alle Komponenten planar \bzw isomorph zu $W$ sind oder aber ein \kf-Minor gefunden wurde.
 
 
 \section{Behandlung von \kdd-Minoren}
@@ -26,10 +26,10 @@ Um das zentrale Theorem aus \cite{KeM92}, welches den \kdd-Minor untersucht, zu 
 \begin{beweis}
   % Proof omitted in KeM92
   Seien $c_1, c_2, ..., c_k$ die Knoten von $C$ und $Z = \{Z_1, Z_2, ..., Z_k\}$ beziehungsweise $Z = \{Z_1, Z_2, ..., Z_{k-1}\}$ die Zusammenhangskomponenten, die durch $G - C$ entstehen.
-  Die zugehörigen augmentierten Komponenten seien $A_1, A_2, ..., A_k$ \bzw $A_1, A_2, ..., A_{k-1}$.
+  Die augmentierten Komponenten der Zusammenhangskomponenten seien $A_1, A_2, ..., A_k$ \bzw $A_1, A_2, ..., A_{k-1}$.
   Betrachtet wird eine beliebige dieser augmentierten Komponenten $A_i$.
-  Der Definition der augmentierten Komponenten nach finden sich bereits alle Knoten von $A_i$ in $G$ wieder. % Teilgraph
-  Weiterhin enthält $G$ mindestens alle Kanten in $A_i - C$ sowie die verbindenden Kanten zwischen $A_i$ und $C$.
+  Der Definition der augmentierten Komponenten nach finden sich bereits alle Knoten von $A_i$ in $G$ wieder, da $Z_i$ ein Teilgraph von $G$ ist.
+  Weiterhin enthält $G$ mindestens alle Kanten in $A_i - C$ sowie alle Kanten $(u, v)$ mit $u \in Z_i, v \in C$.
   Jedoch bilden in $A_i$ die Knoten von $C$ eine Clique, es existieren also \ggf Kanten zwischen den Knoten von $C$ in $A_i$, die es nicht in $G$ gibt.
   Es bleibt zu zeigen, dass die Kanten, die für diese Clique in $A_i$ nötig sind, durch Kantenkontraktionen in $G$ erzeugt werden können.
   Dadurch, dass $G$ $k$-zusammenhängend ist, besitzt jede Zusammenhangskomponente von $G - C$ Kanten zu allen $c_1, c_2, ..., c_k$.
@@ -37,16 +37,21 @@ Um das zentrale Theorem aus \cite{KeM92}, welches den \kdd-Minor untersucht, zu 
   Das Theorem unterscheided nun zwei Fälle, um die fehlenden Kanten bereitstellen zu können:
   \begin{enumerate}
     \item Es existieren $k$ Zusammenhangskomponenten.
-          Wird $A_i$ betrachtet, kommen die Knoten in $Z - Z_i$ infrage, um durch Kantenkontraktionen die fehlenden Kanten für die Clique von $C$ in $A_i$ zu erzeugen.
-          Um die Kanten von $C$ in $A_i$ in $G$ zu erzeugen, kann zunächst der Pfad, der $c_1$ mit $Z_1$ verbindet, kontrahiert werden.
-          Anschließend ist $c_1$ mit allen Knoten in $C$ verbunden.
+          Wird $A_i$ betrachtet, kommt der Teilgraph $G - Z_i$ infrage, um durch Kantenkontraktionen die fehlenden Kanten für die Clique von $C$ in $A_i$ zu erzeugen.
+          Um die Kanten von $C$ in $A_i$ in $G$ zu erzeugen, kann zunächst $Z_1$ zu einem Knoten $z_1$ kontrahiert werden.
+          Er ist adjazent zu allen Knoten von $C$.
+          Wird $(z_1, c_1)$ kontrahiert, ist folglich $c_1$ adjazent zu allen Knoten in $C - \{c_1\}$
           Dies kann analog für alle Knoten in $C$ und den entsprechenden Zusammenhangskomponenten durchgeführt werden, außer für $c_i$, da $A_i$ der gesuchte Minor ist.
           Allerdings ist $c_i$ aufgrund des $k$-Zusammenhangs mit allen anderen Zusammenhangskomponenten verbunden, sodass $C$ nach den beschriebenen Kontraktionen eine Clique bildet.
     \item Es existieren $k-1$ Komponenten von denen mindestens zwei aus mehr als einem Knoten bestehen.
-          Analog zum vorherigen Fall können die Pfade zwischen den Knoten von $C$ und den Zusammenhangskomponenten $A$ kontrahiert werden.
-          Es fehlt jedoch ein Pfad, da eine Zusammenhangskomponente weniger vorliegt.
-          Es gibt mindestens eine Zusammenhangskomponente aus $Z - Z_i$, die aus zwei oder mehr Knoten besteht.
-          Da der Graph $k$-zusammenhängend ist, sind mindestens zwei dieser Knoten mit allen in $C$ verbunden, sodass sie durch Kontraktionen mit zwei unterschiedlichen Knoten aus $C$ genutzt werden können, um die gesuchte Clique zu erzeugen.
+          Analog zum vorherigen Fall können die Pfade zwischen den Knoten von $C$ und den Zusammenhangskomponenten $Z$ kontrahiert werden.
+          Im Vergleich zum vorherigen Fall liegt jedoch eine Zusammenhangskomponente weniger vor.
+          Allerdings gibt es mindestens eine Zusammenhangskomponente $Z_j \in Z - Z_i$, die aus zwei oder mehr Knoten besteht.
+          Da der Graph $k$-zusammenhängend ist, sind mindestens zwei der Knoten von $Z_j$ über disjunkte Pfade mit allen Knoten in $C$ verbunden.
+          Seien $u, v \in Z_j$ zwei dieser Knoten.
+          Es können zwei Knoten $c_u, c_v \in C$ gewählt werden und anschließend die Pfade $P(u, c_u)$ und $P(v, c_v)$ kontrahiert werden.
+          Dadurch können zwei statt nur einer Kante erzeugt werden, die inzident zu zwei Knoten in $C$ sind.
+          Werden außerdem alle übrigen Kanten wie im ersten Fall beschrieben, erzeugt, dann sind die Knoten von $C$ im resultierenden Minor $A_i$ eine Clique.
   \end{enumerate}
   Ein Beispiel, in dem die augmentierten Komponenten keine Minoren sind, findet sich in \Abb \ref{fig:Theorem33}.
 \end{beweis}
@@ -161,6 +166,9 @@ Anschließend stellen die Autoren einige Lemmata auf, mit denen untersucht wird,
           Durch die Kontraktion dieser beiden Pfade entsteht, wie in \Abb \ref{fig:Lemma332} rechts zu sehen, ein $M$-Minor.
   \end{enumerate}
 \end{beweis}
+
+\newpage
+
 \begin{figure}[H]
   \centering
   \includegraphics[keepaspectratio]{bilder/Lemma331.pdf}
@@ -269,19 +277,19 @@ Als nächstes folgt der Beweis zu \ref{eq:Theorem36}.
 \label{sec:sequenzieller_algorithmus_zum_finden_von_kf_minoren}
 
 Da die Theoreme größtenteils auf $3$-zusammenhängenden Graphen arbeiten, muss der Eingabegraph \ggf zunächst angepasst werden, bevor der Planaritätstests angewendet werden kann.
-Ist der Graph $1$-zusammenhängend, gibt es einen Knoten, der einen $(1, j)$-Separator für $j \geq 2$ bildet.
-Genauso müssen zwei Knoten existieren, die einen $(2, j)$-Separator bilden, falls der Graph $2$-zusammenhängend ist.
+Ist der Graph nicht $2$-zusammenhängend, gibt es einen Knoten, der einen $(1, j)$-Separator für $j \geq 2$ bildet.
+Genauso müssen zwei Knoten existieren, die einen $(2, j)$-Separator bilden, falls der Graph nicht $3$-zusammenhängend ist.
 In beiden Fällen kann der Separator benutzt werden, um den Graphen in $j$ augmentierte Komponenten zu zerlegen.
 Anschließend kann der $3$-Zusammenhang der einzelnen Komponenten rekursiv geprüft werden.
 Sind die Komponenten alle $3$-zusammenhängend, kann auf jede ein Planaritätstest angewendet werden.
-Kezdy und McGuinness verwenden den Williamson-Algorithmus\cite{Wil84}, welcher in Linearzeit für einen Graphen einen \kf- \bzw \kdd-Subdivision ausgibt oder feststellt, dass der Graph planar ist.
+Kezdy und McGuinness verwenden den Williamson-Algorithmus\cite{Wil84}, welcher in Linearzeit für einen Graphen eine \kf- \bzw \kdd-Subdivision ausgibt oder feststellt, dass der Graph planar ist.
 In der Implementierung wird stattdessen der Planaritätstest von Boyer und Myrvold\cite{BoM04} verwendet, der bereits in \OGDF existiert.
 Ergibt der Planaritätstest, dass eine Komponente planar ist, wird sie nicht weiter beachtet.
 Enthält sie einen \kf-Minor, kann der Algorithmus stoppen und diesen ausgeben.
 Wird ein \kdd-Minor gefunden, wird geprüft, welcher der vier Fälle aus Theorem \ref{eq:Theorem36} zutrifft.
 Bei Isomorphie zu $W$ wird die Komponente nicht weiter beachtet.
-Ist der \kdd-Minor ein \dd-Separator in der untersuchten Komponente, kann sie in weitere augmentierte Komponenten zerlegt und der Algorithmus rekursiv darauf angewendet werden.
-Andernfalls müssen genügend Pfade in der Komponente existieren, sodass der \kdd-Minor auch einen \kf-Minor bildet und der Algorithmus ihn ausgeben und anhalten kann.
+Ist der \kdd-Minor ein \dd-Separator in der untersuchten Komponente, kann sie in augmentierte Komponenten zerlegt und der Algorithmus rekursiv darauf angewendet werden.
+Andernfalls müssen genügend Pfade in der Komponente existieren, sodass der \kdd-Minor auch einen \kf-Minor bildet; der Algorithmus kann ihn ausgeben und terminieren.
 Diese Schritte werden solange wiederholt, bis alle augmentierten Komponenten planar \bzw isomorph zu $W$ sind oder ein \kf-Minor gefunden wurde.
 
 \newpage
@@ -306,9 +314,9 @@ Für einen Graphen $G$ sind die einzelnen Schritte zusammengefasst:
 \subsection{Laufzeit}
 Der Laufzeitbeweis ist aus \cite{KeM92}.
 Zunächst werden die einzelnen Schritte für sich betrachtet.
-Schritt \ref{item:algorithmus11} wird durch Block-Cut Trees, Schritt \ref{item:algorithmus12} durch SPQR-Bäume realisiert.
+%Schritt \ref{item:algorithmus11} wird durch Block-Cut-Trees, Schritt \ref{item:algorithmus12} durch SPQR-Bäume realisiert.
 Beide benötigen Linearzeit\cite{HoT73}\cite{GuM00}.
-Für den Planaritätstest in Schritt \ref{item:algorithmus14} wird der Algorithmus von Boyer und Myrvold verwendet, welcher ebenfalls Linearzeit benötigt \cite{BoM04}.
+Für den Planaritätstest in Schritt \ref{item:algorithmus13} wird der Algorithmus von Boyer und Myrvold verwendet, welcher ebenfalls Linearzeit benötigt \cite{BoM04}.
 Schritt \ref{item:algorithmus14} ist ein Isomorphietest zu einem konstanten Graph und kann daher in konstanter Zeit durchgeführt werden.
 Für Schritt \ref{item:algorithmus15} werden maximal 6 Tiefensuchen in Linearzeit ausgeführt, um alle Knoten des \kdd-Minors zu prüfen.
 Der letzte Schritt besteht hauptsächlich aus der Ausgabe, dass ein \kf-Minor gefunden wurde.
@@ -319,12 +327,12 @@ Es kann jedoch keine Aussage darüber getroffen werden, wie groß die Komponente
 So wird im Worst-Case ein Graph $G$ mit $n$ Knoten durch einen \dd-Separator $C$ in drei augmentierte Komponenten aufgeteilt.
 Es kann nicht ausgeschlossen werden, dass zwei Zusammenhangskomponenten, die durch $G - C$ entstehen, nur je einen Knoten haben.
 Dann besteht die dritte augmentierte Komponente aus $n-2$ Knoten, sodass erneut Linearzeit ab Schritt \ref{item:algorithmus13} gebraucht wird.
-Für einen Graph der Größe $n$ ist die Laufzeit der Unterprobleme
+Für einen Graphen mit $n$ Knoten ist die Laufzeit der Unterprobleme:
 \begin{equation*}
   T(n) = T(n_1) + T(n_2) + T(n - n_1 - n_2) + 6 + cn
 \end{equation*}
-Der Wert $6$ entsteht, da für einen \dd-Separator $3$ Knoten entfernt und $6$ hinzugefügt werden.
+Der Wert $6$ entsteht, da für einen \dd-Separator $3$ Knoten entfernt und $9$ hinzugefügt werden.
 Durch $cn$ wird die Linearzeit dargestellt, die außerhalb der Rekursion verbraucht wird.
-Die Größe der drei Unterprobleme liegt bei $n_1, n_2, n - n_1 - n_2 + 6 \leq n - 2$, da jedes Unterproblem mindestens einen Knoten hat.
-Wenn $n_1$ und $n_2$ konstant kleine Werte sind, wird das dritte Unterproblem pro Rekursionsschritt nur konstant kleiner.
+Die Größe der drei Unterprobleme liegt bei $n_1, n_2, n - n_1 - n_2 + 6 \leq n - 2$, da jedes Unterproblem mindestens einen Knoten hat und diese folglich in jedem anderen Unterproblem fehlen.
+Wenn $n_1$ und $n_2$ konstante Werte sind, wird das dritte Unterproblem pro Rekursionsschritt nur konstant kleiner.
 Dadurch liegt die Laufzeitkomplexität insgesamt in $\mathcal{O}(n^2)$\cite{KeM92}.
