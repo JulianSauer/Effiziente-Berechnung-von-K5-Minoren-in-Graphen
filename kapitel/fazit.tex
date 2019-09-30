@@ -1,3 +1,22 @@
 % fazit.tex
 \chapter{Zusammenfassung und Ausblick}
 \label{cha:fazit}
+
+Es wurde ein Verfahren vorgestellt, das entscheiden kann, ob ein Graph einen \kf-Minor enthält.
+Außerdem wurde erklärt, wie sich \kf-Minor-freie Graphen nach dem Theorem von Wagner aufteilen lassen und eine Baumstruktur gezeigt, die diese Aufteilung widerspiegelt.
+Für die Implementierung in OGDF wurden im Wesentlichen Block-Cut Trees und SPQR-Bäume verwendet, um $3$-zusammenhängende Graphen zu erzeugen, und anschließend ein Planaritätstest, um solange \dd-Separatoren zu finden, bis ein \kf-Minor gefunden wurde oder der Graph \kf-Minor-frei ist.
+Bisher werden Zertifikate für $3$-zusammenhängende Graphen, die \kf-Minor-frei sind, erzeugt.
+Vor allem die Berechnung von \kf-Modellen im Eingabegraph ist in Hinblick auf den praktischen Nutzen von wesentlicher Bedeutung.
+Auch kann es sinnvoll sein, für einige praktische Anwendungen mehrere \kf-Minoren in Graphen zu berechnen.
+Dafür könnte der Algorithmus \zB so erweitert werden, dass in gefundenen \kf-Minoren einzelne Kanten verändert (kontrahiert, entfernt) werden, um bei einem erneuten Durchlauf einen anderen \kf-Minor zu finden.
+So könnten viele \kf-Minoren gefunden werden, die sich allerdings kaum unterscheiden und eine hohe Laufzeit verursachen.
+Ein weiterer Ansatz könnte daraus bestehen, den Algorithmus nicht zu terminieren, wenn in einer augmentierten Komponente ein \kf-Minor gefunde wurde.
+Wird stattdessen in den übrigen Komponenten weitergesucht, ist es möglich, \kf-Minoren zu finden, die sich stark voneinander unterscheiden.
+Tests während der experimentellen Analyse haben jedoch angedeutet, dass auf diese Art durchschnittlich nur einstellige Mengen von \kf-Minoren in den getesteten Graphen gefunden werden konnten.
+Da es sich um ein heuristisches Verfahren handelt, wurde es nicht mit in die Arbeit aufgenommen -- einige praktische Anwendungen, wie die Berechnung des maximalen Schnittes in Graphen, die nicht \kf-Minor-frei sind, könnten jedoch davon profitieren.
+Der Ansatz müsste in einer experimentellen Analyse für solche speziellen Anwendungsfälle geprüft werden.
+
+Darüber hinaus gibt es Ansätze in \cite{ReL08}, \cite{ReL} und \cite{Li11}, die in theoretisch linearer Laufzeit entscheiden, ob ein Graph \kf-Minor-frei ist.
+Allerdings bleibt die Frage offen, ob eine Implementierung in der Praxis eine bessere Laufzeit aufweisen würde, da teils mit großen Konstanten gearbeitet wird.
+Andererseits wären weitere Laufzeittests speziell für Graphen, die nicht planar sind und keinen \kf-Minor enthalten, interessant, da vor allem dann hohe Laufzeiten in der Praxis auftreten können.
+Für die getesteten Graphen kann der Algorithmus dagegen in wenigen Sekunden entscheiden, ob ein \kf-Minor in einem Graph enthalten ist.

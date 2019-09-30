@@ -5,7 +5,7 @@
 Die Arbeit auf dem in \cite{KeM92} vorgestellten sequenziellen Algorithmus von Kezdy und McGuinness, der im Folgenden erklärt wird.
 Als Eingabe wird ein ungerichteter Graph ohne Mehrfachkanten oder Schleifen erwartet, ausgegeben wird, ob der Graph einen $K_5$-Minor hat.
 Für den Fall, dass einer gefunden wurde, kann zusätzlich ausgegeben werden, welche Knoten den Minor formen.
-Die Laufzeit liegt in $\mathcal{O}(n^2)$. % TODO
+Die Laufzeit liegt in $\mathcal{O}(n^2)$.
 
 Planaritätstests können bereits in linearer Laufzeit entscheiden, ob ein Graph einen \kf- oder \kdd-Minor enthält\cite{BoM04}.
 Es muss folglich der Fall behandelt werden, in dem der Test stoppt, weil er einen \kdd-Minor gefunden hat.
@@ -298,7 +298,33 @@ Für einen Graphen $G$ sind die einzelnen Schritte zusammengefasst:
   \item \label{item:algorithmus14} $G$ ist isomorph zu $W$: Gib zurück, dass kein \kf-Minor gefunden wurde.
                                    $G$ ist nicht isomorph zu $W$: Weiter zu Schritt \ref{item:algorithmus15}
   \item \label{item:algorithmus15} Seien $R = \{a, b, c\}$ die roten und $B = \{x, y, z\}$ die blauen Branch-Ends der \kdd-Subdivision.
-                                   Ist $R$ einen \dd-Separator, sodass alle Knoten aus $B$ in unterschiedlichen Zusammenhangskomponenten sind, dann bilde damit augmentierte Komponenten und wende den Algorithmus rekursiv auf jede an.
+                                   Ist $R$ einen \dd-Separator, sodass alle Knoten aus $B$ in unterschiedlichen Zusammenhangskomponenten sind, dann bilde damit augmentierte Komponenten und wende Schritt \ref{item:algorithmus13} rekursiv auf jede an.
                                    (Analog für $B$ als Separator)
   \item \label{item:algorithmus16} Ist dieser Schritt erreicht, enthält $G$ einen \kf-Minor bestehend aus der \kdd-Subdivision, dem Pfad, der zwei rote, sowie dem Pfad, der zwei blaue Knoten verbindet.
 \end{enumerate}
+
+\subsection{Laufzeit}
+Der Laufzeitbeweis ist aus \cite{KeM92}.
+Zunächst werden die einzelnen Schritte für sich betrachtet.
+Schritt \ref{item:algorithmus11} wird durch Block-Cut Trees, Schritt \ref{item:algorithmus12} durch SPQR-Bäume realisiert.
+Beide benötigen Linearzeit\cite{HoT73}\cite{GuM00}.
+Für den Planaritätstest in Schritt \ref{item:algorithmus14} wird der Algorithmus von Boyer und Myrvold verwendet, welcher ebenfalls Linearzeit benötigt \cite{BoM04}.
+Schritt \ref{item:algorithmus14} ist ein Isomorphietest zu einem konstanten Graph und kann daher in konstanter Zeit durchgeführt werden.
+Für Schritt \ref{item:algorithmus15} werden maximal 6 Tiefensuchen in Linearzeit ausgeführt, um alle Knoten des \kdd-Minors zu prüfen.
+Der letzte Schritt besteht hauptsächlich aus der Ausgabe, dass ein \kf-Minor gefunden wurde.
+
+Jeder der einzelnen Schritte kann also in Linearzeit durchgeführt werden.
+Allerdings wird nach Schritt \ref{item:algorithmus15} \ggf Schritt \ref{item:algorithmus13} nach dem Divide-and-Conquer Prinzip rekursiv auf die augmentierten Komponenten angewendet.
+Es kann jedoch keine Aussage darüber getroffen werden, wie groß die Komponenten sind.
+So wird im Worst-Case ein Graph $G$ mit $n$ Knoten durch einen \dd-Separator $C$ in drei augmentierte Komponenten aufgeteilt.
+Es kann nicht ausgeschlossen werden, dass zwei Zusammenhangskomponenten, die durch $G - C$ entstehen, nur je einen Knoten haben.
+Dann besteht die dritte augmentierte Komponente aus $n-2$ Knoten, sodass erneut Linearzeit ab Schritt \ref{item:algorithmus13} gebraucht wird.
+Für einen Graph der Größe $n$ ist die Laufzeit der Unterprobleme
+\begin{equation*}
+  T(n) = T(n_1) + T(n_2) + T(n - n_1 - n_2) + 6 + cn
+\end{equation*}
+Der Wert $6$ entsteht, da für einen \dd-Separator $3$ Knoten entfernt und $6$ hinzugefügt werden.
+Durch $cn$ wird die Linearzeit dargestellt, die außerhalb der Rekursion verbraucht wird.
+Die Größe der drei Unterprobleme liegt bei $n_1, n_2, n - n_1 - n_2 + 6 \leq n - 2$, da jedes Unterproblem mindestens einen Knoten hat.
+Wenn $n_1$ und $n_2$ konstant kleine Werte sind, wird das dritte Unterproblem pro Rekursionsschritt nur konstant kleiner.
+Dadurch liegt die Laufzeitkomplexität insgesamt in $\mathcal{O}(n^2)$\cite{KeM92}.

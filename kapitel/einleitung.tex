@@ -2,6 +2,9 @@
 \chapter{Einleitung}
 \label{cha:einleitung}
 
+In dieser Masterarbeit wird ein Algorithmus erklärt und implementiert, der entscheiden kann, ob ein Graph \kf-Minor-frei ist.
+Er basiert auf einem von Kezdy und McGuinness \cite{KeM92} vorgestellten Algorithmus, der quadratische Laufzeitkomplexität besitzt.
+
 \section{Motivation und Hintergrund}
 \label{sec:motivation_und_hintergrund}
 Zunächst kann durch die Berechnung von \kf-Minoren entschieden werden, ob ein Graph \kf-Minor frei ist.
@@ -18,3 +21,7 @@ Andererseits können einer oder mehrere gefundene \kf-Minoren benutzt werden, um
 
 \section{Aufbau der Arbeit}
 \label{sec:aufbau}
+Zunächst werden einige Definition gegeben, die anschließend benutzt werden, um den Algorithmus von Kezdy und McGuinness vorzustellen.
+Anschließend wird ein auf Wagner \cite{Wag37} zurückzuführendes Strukturtheorem der beiden Autoren genauer betrachtet.
+Für den Fall, dass ein Graph \kf-Minor-frei ist, kann dadurch ein Zertifikat erzeugt werden, über dass die getroffene Aussage verifiziert werden kann.
+Letztlich beschäftigt sich die Arbeit mit der Implementierung des Algorithmus im \emph{Open Graph Drawing Framework} sowie einer experimentellen Analyse dieser Implementierung.
