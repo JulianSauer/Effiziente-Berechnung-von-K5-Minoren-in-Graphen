@@ -15,6 +15,7 @@ Genauso sind die betrachteten Graphen frei von Schleifen der Form $e = (v, v)$ m
   \label{fig:Kantenkontraktion}
 \end{wrapfigure}
 Die Menge adjazenter Knoten eines Knotens $v$ wird durch $N(v)$ angegeben.
+Als \emph{Knotengrad} von $v$ wird die Kardinalität von $N(v)$ bezeichnet.
 Bei einer \emph{Kantenkontraktion} einer Kante $e = (u, v)$ wird ein neuer Knoten $w$ hinzugefügt, sodass $N(w) = N(u) \cup N(v)$ gilt und anschließend $e$ aus dem Graphen entfernt.
 In \Abb \ref{fig:Kantenkontraktion} ist das Vorgehen skizziert.
 Analog kann, wie in \Abb \ref{fig:Pfadkontraktion} gezeigt, ein Pfad kontrahiert werden, indem nacheinander je eine Kante des Pfades kontrahiert wird.
@@ -29,11 +30,14 @@ Analog kann, wie in \Abb \ref{fig:Pfadkontraktion} gezeigt, ein Pfad kontrahiert
 Ein \emph{Minor} $H$ eines Graphen $G$ bezeichnet einen Graph, der isomorph zu $G$ ist, nachdem eine beliebige Menge an Operationen von Kantenkontraktionen, Kantenentfernungen und Knotenentfernungen durchgeführt wurde.
 Ein Beispiel dazu findet sich in \Abb \ref{fig:Minor}.
 Jeder Graph ist sein eigener Minor, genauso ist jeder Teilgraph ein gültiger Minor.
-Dass $H$ ein Minor von $G$ ist, wird dargestellt durch $H$ \minor $G$. % TODO: Kann vermutlich weg
+Dass $H$ ein Minor von $G$ ist, wird dargestellt durch $H$ \minor $G$.
 Ist $V$ eine Menge von Knoten, die einen zusammenhängenden Teilgraphen formen, der durch Kontraktionen durch einen neuen Knoten $w$ ersetzt wurde, dann bezeichnet das \emph{Branch-Set} von $w$ die Menge $V$.
 In \Abb \ref{fig:Minor} besteht beispielsweise das Branch-Set von $g$ aus $\{a, b, c\}$, zu $f$ in $H_2$ gehört die Knotenmenge $\{f\}$ in $G$.
 
-Für die Knotenmenge $U \in V$ bezeichnet $G - U$ den Teilgraph, der entsteht, wenn alle Knoten aus $U$ mit ihren inzidenten Kanten aus $G$ entfernt werden.
+Für die Knotenmenge $U \subseteq V$ bezeichnet $G - U$ den Teilgraph, der entsteht, wenn alle Knoten aus $U$ mit ihren inzidenten Kanten aus $G$ entfernt werden.
+Besteht eine Knotenmenge $\{u\}$ aus nur einem Knoten, wird statt $G - \{u\}$ auch $G - u$ verwendet.
+Durch $G(U)$ für $U \subseteq V$ wird der Teilgraph von $G$, dargestellt, der alle Knoten aus $U$ enthält sowie alle Kanten $e = (u, v) \in E$, für die gilt $u, v \in U$.
+Für einzelne Knoten $u$ wird statt $G(\{u\})$ vereinfacht $G(u)$ geschrieben.
 Eine \emph{Subdivision} $H$ eines Graphen $G$ enthält alle Knoten aus $G = (V, E)$, sodass jedes inzidente Knotenpaar $\{u, v\} \subseteq V$ in $H$ durch einen Pfad verbunden ist.
 \begin{figure}[H]
   \centering
@@ -53,7 +57,7 @@ Ein Graph wird als \emph{planar} bezeichnet, wenn er sich so in der Ebene einbet
 Ein \kf (\sAbb \ref{fig:K5}) ist ein Graph bestehend aus einer Clique von fünf Knoten.
 Ein \kdd (\sAbb \ref{fig:K33}) ist ein vollständig bipartiter Graph mit sechs Knoten, sodass jede Bipartition drei Knoten enthält.
 Er lässt sich also in zwei Knotenmengen unterteilen (im Folgenden als rote und blaue Menge bezeichnet), sodass alle Knoten der einen Menge zu allen Knoten der anderen Menge benachbart sind.
-Nach dem Satz von Kuratowski ist ein Graph genau dann planar, wenn er keine \kf- oder \kdd-Subdivision als Teilgraph beinhaltet.
+Nach dem Satz von Kuratowski \cite{Kur30} ist ein Graph genau dann planar, wenn er keine \kf- oder \kdd-Subdivision als Teilgraph beinhaltet.
 Eine alternative Formulierung von Wagner \cite{Wag37} sagt aus, dass ein Graph genau dann planar ist, wenn er keinen \kf-Minor oder \kdd-Minor enthält\cite{Die12}.
 
 \ \\
@@ -68,6 +72,7 @@ Diese sechs Knoten werden in einer \kdd-Subdivision (analog in einem \kdd-Minor)
 Ein \emph{Branch-Path} in $H$ ist ein Pfad, der zwei Branch-Ends verbindet, beispielsweise $P(a, x)$.
 Ein \emph{Branch-Fan} bezieht sich immer auf eines der Branch-Ends und wird \zB für $a$ als $F(a)$ geschrieben.
 Bezeichnet werden dadurch alle Pfade, die zu einem anderen Branch-End führen -- für $a$ also die Pfade $P(a, x)$, $P(a, y)$ und $P(a, z)$.
+Zwei Branch-Paths sind \emph{parallel}, wenn ihre Endpunkte vier unterschiedlichen Branch-Ends sind.
 
 
 Der Graph $W$ bezeichnet einen speziellen Graph, der aus acht Knoten besteht.
