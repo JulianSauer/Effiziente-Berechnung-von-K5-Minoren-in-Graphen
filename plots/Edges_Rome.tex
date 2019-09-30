@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+  xlabel=Anzahl der Knoten,
+  xmin=10,
+  xmax=100,
+  ymin=0,
+  ymax=150,
+  ylabel=Anzahl der Kanten,
+  no markers]
+\addplot table [y=Edges, x=Nodes]{rome.dat};
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

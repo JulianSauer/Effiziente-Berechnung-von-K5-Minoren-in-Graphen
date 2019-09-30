@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest, scaled x ticks=false}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+  xlabel=Anzahl der Knoten,
+  ylabel=Millisekunden,
+  %xmin=0,
+  %xmax=10000,
+  %ymin=0,
+  %ymax=1700,
+  no markers,
+  /pgf/number format/.cd,
+  use comma,
+  1000 sep={.},
+  legend pos=outer north east]
+\addplot [green!50!black] table [y=KezdyMcGuinness, x=Nodes]{triconnected_sparse.dat};
+\addlegendentry {Kezdy-McGuinness 1}
+\addplot [blue!50!black] table [y=KezdyMcGuinness, x=Nodes]{triconnected_dense.dat};
+\addlegendentry {Kezdy-McGuinness 2}
+\addplot [green, dashed] table [y=BoyerMyrvold, x=Nodes]{triconnected_sparse.dat};
+\addlegendentry{Boyer-Myrvold 1}
+\addplot [blue!50!white, dashed] table [y=BoyerMyrvold, x=Nodes]{triconnected_dense.dat};
+\addlegendentry{Boyer-Myrvold 2}
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

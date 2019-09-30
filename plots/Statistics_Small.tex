@@ -1,0 +1,31 @@
+\documentclass{standalone}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+  xlabel=Anzahl der Knoten,
+  ylabel=Anzahl,
+  xmin=10,
+  xmax=1000,
+  ymin=0,
+  ymax=1,
+  /pgf/number format/.cd,
+  use comma,
+  1000 sep={},
+  no markers,
+  yticklabel={\pgfmathparse{\tick*100}\pgfmathprintnumber{\pgfmathresult}\%},]
+\addplot [red!50!black] table [y=AverageSeparators, x=Nodes]{triconnected_small.dat};
+\addlegendentry {$(3, 3)$-Separator}
+%\addplot [red!50!black] table [y=AverageK5s, x=Nodes]{triconnected_small.dat};
+%\addlegendentry{$K_5$-Minor}
+%\addplot [green!50!black] table [y=AverageK5Free, x=Nodes]{triconnected_small.dat};
+%\addlegendentry{$K_5$-Minor-frei}
+%\addplot [yellow!50!black] table [y=AveragePlanar, x=Nodes]{triconnected_small.dat};
+%\addlegendentry{Planar}
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

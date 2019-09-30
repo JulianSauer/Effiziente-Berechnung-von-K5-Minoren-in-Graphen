@@ -1,0 +1,29 @@
+\documentclass{standalone}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+  xlabel=Anzahl der Knoten,
+  xmin=10,
+  xmax=100,
+  ymin=0,
+  ymax=0.2,
+  ylabel=Millisekunden,
+  /pgf/number format/.cd,
+  use comma,
+  1000 sep={},
+  yticklabel style={/pgf/number format/fixed},
+  legend pos=outer north east]
+\addplot [no markers, green!50!black] table [y=KezdyMcGuinness, x=Nodes]{rome.dat};
+\addlegendentry {Kezdy-McGuinness}
+\addplot [no markers, blue!50!black] table [y=BoyerMyrvold, x=Nodes]{rome.dat};
+\addlegendentry{Boyer-Myrvold}
+\addplot [mark=x, red!50!black] table [y=KezdyMcGuinness, x=Nodes]{rome2.dat};
+\addlegendentry{$K_5$-Minor-frei}
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
